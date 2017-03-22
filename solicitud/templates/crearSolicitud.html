@@ -1,0 +1,33 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Solicitud</title>
+</head>
+<body>
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="page-header">
+                <h2>Crear Solicitud</h2>
+            </div>
+
+            <form method="post" style="width: 80%">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <input type="submit" value="Guardar" class="btn btn-primary"/>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
