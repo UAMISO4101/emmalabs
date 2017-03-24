@@ -13,3 +13,6 @@ class Usuario(models.Model):
     ciudad = models.CharField(max_length=50, null=True)
     intereses = models.CharField(max_length=200, null=False)
     rol = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return '{}'.format(self.nombres)
