@@ -1,0 +1,41 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--jquery se requiere primero que bootstrap js-->
+    {% load static %}
+    <script type="text/javascript" src="{% static "jquery-3.2.0.min.js" %}"></script>
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta charset="UTF-8">
+    <title>Buscar protocolos</title>
+</head>
+<div class="row">
+    <div class="col-md-6 col-sm-offset-3">
+        <div class="page-header">
+            <h2>Buscar Protocolos</h2>
+        </div>
+    </div>
+    {% block content %}
+        <div class="row">
+            <div class="col-md-6 col-sm-offset-3">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form formProtocolo %}
+                    {% buttons %}
+                        <input type="submit" value="Buscar" class="btn btn-primary"/>
+                        <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Cancelar</a>
+                    {% endbuttons %}
+
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+
+</div>
+</body>
+</html>

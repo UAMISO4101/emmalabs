@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import include, url
+from protocolo.views import buscar_protocolo_vista
 
 urlpatterns = [
     url(r'^', include('solicitud.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^buscarProtocolo/$', buscar_protocolo_vista, name='buscarProtocolo'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
