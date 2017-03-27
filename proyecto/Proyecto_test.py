@@ -10,5 +10,5 @@ class ProyectoTest(TestCase):
         self.browser.quit()
 
     def test_title(self):
-        self.browser.get('http://localhost:8000/admin')
-        self.assertIn('Busco Ayuda', self.browser.title)
+        self.browser.get('http://localhost:8000/proyectos')
+        self.assertIn('Proyectos', self.browser.title)
