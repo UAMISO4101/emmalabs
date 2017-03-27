@@ -3,7 +3,7 @@ from functools import partial
 
 from django import forms
 
-from models import Protocolo, ClasificacionProtocolo
+from .models import Protocolo, ClasificacionProtocolo
 
 
 class MyModelChoiceField(forms.ModelChoiceField):

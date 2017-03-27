@@ -16,5 +16,5 @@ class Protocolo(models.Model):
     version = models.FloatField(default=1.0)
     insumos = models.ManyToManyField(Insumo, related_name="insumos")
     fecha_creacion = models.DateField(default=datetime.now, blank=True, null=False)
-    codigo = models.CharField(max_length=10, default="PRO-000", blank=True, null=False)
+    codigo = models.CharField(max_length=10, blank=True, null=False)
     clasificacion = models.ForeignKey(ClasificacionProtocolo, related_name="clasificacion")
