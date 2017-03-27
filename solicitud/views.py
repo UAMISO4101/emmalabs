@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .forms import SolicitudForm
-
+from solicitud.forms import SolicitudForm
 # Vista para crear una solicitud
+
 def crear_solicitud(request):
     if request.method == 'POST':
         form = SolicitudForm(request.POST)
