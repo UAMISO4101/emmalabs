@@ -1,0 +1,20 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyectos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/proyectos.css' %}" />
+</head>
+    <body>
+        <div class="main-container__title">Proyectos</div>
+        <ul class="main-container__cards">
+            {% for proyecto in lista_proyectos %}
+                <li class="main-container__card">
+                    <div class="main-container__card-name">{{ proyecto.nombre }}</div>
+                    <div class="main-container__card-description">{{ proyecto.descripcion }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

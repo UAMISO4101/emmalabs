@@ -23,6 +23,7 @@ from protocolo.views import buscar_protocolo_vista
 urlpatterns = [
     url(r'^', include('solicitud.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('proyecto.urls')),
     url(r'^buscarProtocolo/$', buscar_protocolo_vista, name='buscarProtocolo'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
