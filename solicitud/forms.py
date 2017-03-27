@@ -1,7 +1,8 @@
 from django import forms
 
-from .models import Solicitud
+from models import Solicitud
 
+# Formulario de una solicitud
 class SolicitudForm(forms.ModelForm):
 
     class Meta:

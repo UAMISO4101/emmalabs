@@ -1,5 +1,5 @@
 from django.contrib import admin
 from .models import Solicitud
-# Register your models here.
 
+# Adicionar modelo Solicitud al administrador de Django
 admin.site.register(Solicitud)

@@ -15,6 +15,13 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-sm-offset-3">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+
             <div class="page-header">
                 <h2>Crear Solicitud</h2>
             </div>
