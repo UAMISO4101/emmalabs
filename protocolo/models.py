@@ -21,5 +21,8 @@ class Protocolo(models.Model):
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     version = models.FloatField(default=1.0)
     pasos = models.ManyToManyField(Paso, related_name="pasos")
-    fecha_creacion = models.DateField(default=datetime.now, blank=True)
-    clasificacion = models.ForeignKey(ClasificacionProtocolo, on_delete=models.CASCADE, related_name="clasificacion")
+    fecha_creacion = models.DateField(default=datetime.now, blank=True, null=False)
+    codigo = models.CharField(max_length=10, default="PRO-000", blank=True , null=False)
+    clasificacion = models.ForeignKey(ClasificacionProtocolo, related_name="clasificacion")
+
+

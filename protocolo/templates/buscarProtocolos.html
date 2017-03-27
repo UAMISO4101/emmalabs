@@ -3,9 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--jquery se requiere primero que bootstrap js-->
-    {% load static %}
-    <script type="text/javascript" src="{% static "jquery-3.2.0.min.js" %}"></script>
+
+    <!-- inicializar el selector de fechas de JQuery -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#id_fecha_creacion").datepicker();
+        });
+    </script>
+
 
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
