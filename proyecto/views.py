@@ -13,3 +13,10 @@ def proyectos(request):
 
     #context = {'lista_proyectos': lista_proyectos}
     return render(request, 'proyectos.html', context)
+
+def detalleProyecto(request, id):
+    proyecto = Proyecto.objects.get(id=id)
+    context = {
+        'proyecto': proyecto
+    }
+    return render(request, 'detalle_proyecto.html', context)
