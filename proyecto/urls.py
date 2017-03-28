@@ -3,5 +3,4 @@ from . import views
 
 urlpatterns = [
     url(r'^proyectos/$', views.proyectos),
-    url(r'^proyectos/(\d+)/$', views.detalleProyecto),
 ]
