@@ -7,30 +7,44 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>aaaa</title>
-</head>
-<body>
-{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Experimentos</title>
+    </head>
+    <body>
+    {% block content %}
     <section class="align-center col-md-6 col-sm-offset-3">
-        {% if messages %}
+            {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
-        {% endif %}
+            {% endif %}
 
         <header class="page-header">
-            <h2>{{ proyecto.nombre }}</h2>
+            <h2 class="text-center">{{ proyecto.nombre }}</h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Científico a cargo</td>
+                        <td>{{ proyecto.cientifico_asignado.nombres }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de creación</td>
+                        <td>{{ proyecto.fecha_creacion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Estado del proyecto</td>
+                        <td>{{ proyecto.estado }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </header>
-
 
         <table class="table table-hover">
             <thead>
-                 <tr>
-                     <th colspan="5" class="text-center"> <h3>Experimentos</h3></th>
-                 </tr>
                 <tr>
+                    <th colspan="5" class="text-center"> <h3>Experimentos</h3></th>
+                </tr>
                     <th>Nombre</th>
                     <th>Estado</th>
                     <th>resultado</th>
@@ -39,18 +53,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for experimento in proyecto.experimentos.all  %}
-                    <tr>
-                        <td>{{ experimento.nombre }}</td>
-                        <td>{{ experimento.estado }}</td>
-                        <td>{{ experimento.resultado }}</td>
-                        <td>{{ experimento.fecha_resultado }}</td>
-                        <td><input type="button" value = "Registrar" class="btn btn-primary"></td>
-                    </tr>
-                {% endfor %}
+            {% for experimento in proyecto.experimentos.all  %}
+                <tr>
+                    <td>{{ experimento.nombre }}</td>
+                    <td>{{ experimento.estado }}</td>
+                    <td>{{ experimento.resultado }}</td>
+                    <td>{{ experimento.fecha_resultado }}</td>
+                    <td><input type="button" value = "Registrar" class="btn btn-primary"></td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </section>
-{% endblock %}
-</body>
+    {% endblock %}
+    </body>
 </html>
