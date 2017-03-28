@@ -7,7 +7,7 @@ from insumo.models import Insumo
 
 
 class ClasificacionProtocolo(models.Model):
-    nombre_clasificacion = models.CharField(max_length=50, default="Sin clasificación")
+    nombre_clasificacion = models.CharField(max_length=50, default="Sin clasificacion")
 
 
 class Protocolo(models.Model):
