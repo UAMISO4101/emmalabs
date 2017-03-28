@@ -1,3 +1,10 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,15 +12,45 @@
     <title>aaaa</title>
 </head>
 <body>
-    {{ proyecto.nombre }}
-    <table>
-        <tbody>
-            {% for experimento in proyecto.experimentos.all  %}
-                <tr>
-                    <td>{{ experimento.nombre }}</td>
-                </tr>
+{% block content %}
+    <section class="align-center col-md-6 col-sm-offset-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
-        </tbody>
-    </table>
+        {% endif %}
+
+        <header class="page-header">
+            <h2>{{ proyecto.nombre }}</h2>
+        </header>
+
+
+        <table class="table table-hover">
+            <thead>
+                 <tr>
+                     <th colspan="5" class="text-center"> <h3>Experimentos</h3></th>
+                 </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>resultado</th>
+                    <th>Fecha resultado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for experimento in proyecto.experimentos.all  %}
+                    <tr>
+                        <td>{{ experimento.nombre }}</td>
+                        <td>{{ experimento.estado }}</td>
+                        <td>{{ experimento.resultado }}</td>
+                        <td>{{ experimento.fecha_resultado }}</td>
+                        <td><input type="button" value = "Registrar" class="btn btn-primary"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
 </body>
 </html>
