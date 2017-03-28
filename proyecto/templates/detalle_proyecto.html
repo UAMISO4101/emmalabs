@@ -59,7 +59,9 @@
                     <td>{{ experimento.estado }}</td>
                     <td>{{ experimento.resultado }}</td>
                     <td>{{ experimento.fecha_resultado }}</td>
-                    <td><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Realizar</button></td>
+                    <!--% if experimento.resultado == 'Pendiente' %-->
+                    <td><button type="button" class="btn btn-primary btn-lg" onclick="show_results({{ experimento.id }});" data-toggle="modal" data-target="#myModal">Realizar</button></td>
+                    <!--% endif %-->
                 </tr>
             {% endfor %}
             </tbody>
@@ -74,9 +76,10 @@
                         <h4 class="modal-title" id="modalResultado">Registrar resultado</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form text-center">
+                        <form method="post" id="formulario" class="form text-center">
+                            <input type="hidden" name="experimento_id" id="experimento"/>
                             <div class="form-group-sm">
-                                <select class="col-md-12 form-control">
+                                <select class="col-md-12 form-control" name="resultado">
                                     <option value="Pendiente">Pendiente</option>
                                     <option value="Exitoso">Exitoso</option>
                                     <option value="Fallido">Fallido</option>
@@ -87,11 +90,17 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="submit" form="formulario" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            function show_results(id){
+                $('#experimento').val(id);
+            }
+        </script>
 
     </section>
 {% endblock %}

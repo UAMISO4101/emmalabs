@@ -2,6 +2,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+from experimento.models import Experimento
 from .models import Proyecto
 
 
@@ -11,6 +12,12 @@ def proyectos(request):
     return render(request, 'proyectos.html', context)
 
 def detalleProyecto(request, id):
+    if(request.method == "POST"):
+        resultado = request.POST['resultado']
+        id = request.POST['experimento_id']
+        experimento = Experimento.objects.get(id=id)
+        experimento.resultado = resultado
+        experimento.save()
     proyecto = Proyecto.objects.get(id=id)
     context = {
         'proyecto': proyecto
