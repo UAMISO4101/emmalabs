@@ -21,11 +21,12 @@ class ProtocoloForm(forms.ModelForm):
                                        to_field_name='nombre_clasificacion',
                                        label='Clasificacion',
                                        required=False)
+    codigo = forms.CharField(max_length=50, label='Codigo', required=False)
+    nombre_protocolo = forms.CharField(max_length=50, label='Nombre', required=False)
 
     class Meta:
         model = Protocolo
-        fields = ('nombre', 'codigo',)
+        fields = ('nombre',)
         labels = {
-            'nombre': 'Nombre:',
-            'codigo': 'Codigo'
+            'nombre': 'Nombre2:',
         }
