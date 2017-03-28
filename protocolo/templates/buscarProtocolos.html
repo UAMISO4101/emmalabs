@@ -38,7 +38,9 @@
                         <input type="submit" value="Buscar" class="btn btn-primary"/>
                         <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Cancelar</a>
                     {% endbuttons %}
+                </form>
 
+                {% if mostrar_resultados %}
                     <div class="page-header">
                         <h2>Resultados:</h2>
                     </div>
@@ -53,8 +55,8 @@
                             </div>
                         </div>
                     {% endfor %}
+                {% endif %}
 
-                </form>
             </div>
         </div>
     {% endblock %}

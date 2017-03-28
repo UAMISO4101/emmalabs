@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from functools import partial
-
+import datetime
 from django import forms
-
+from functools import partial
 from .models import Protocolo, ClasificacionProtocolo
 
 
@@ -22,11 +21,10 @@ class ProtocoloForm(forms.ModelForm):
                                        label='Clasificacion',
                                        required=False)
     codigo = forms.CharField(max_length=50, label='Codigo', required=False)
-    nombre_protocolo = forms.CharField(max_length=50, label='Nombre', required=False)
 
     class Meta:
         model = Protocolo
         fields = ('nombre',)
         labels = {
-            'nombre': 'Nombre2:',
+            'nombre': 'Nombre:',
         }
