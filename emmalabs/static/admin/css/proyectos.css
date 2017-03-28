@@ -7,8 +7,8 @@
     margin: 0;
     padding: 0;
 }
-    .container .jumbotron .main-container__cards li.card{
-        border: 1px solid #DDD;
+    .container .jumbotron .main-container__cards li.card {
+        border: 1px solid #CCC;
         display: inline-block;
         margin: 5px 3px;
         width: 200px !important;
@@ -23,6 +23,10 @@
         font-size: 11px;
     }
 
+    .container .jumbotron .main-container__cards .card-block {
+        padding: 0 5px;
+    }
+
     .container .jumbotron .main-container__cards .btn-primary {
-        margin: 0 5px 5px 5px;
+        margin: 0 0 5px 0;
     }
