@@ -25,7 +25,7 @@
                               <i><span class="state">{{ proyecto.estado }}</span></i>,
                               <i><span class="state">{{ proyecto.fecha_creacion }}</span></i>
                             <p class="card-text">{{ proyecto.descripcion }}</p>
-                            <a href="#" class="btn btn-primary">Detalle</a>
+                            <a href="https://emmalabs.herokuapp.com/proyectos/{{ proyecto.id }}/" class="btn btn-primary">Detalle</a>
                           </div>
                         </li>
                     {% endfor %}
