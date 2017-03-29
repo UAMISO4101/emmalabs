@@ -1,0 +1,68 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>Detalle protocolo</title>
+</head>
+<body>
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="page-header">
+                <h2>Protocolo: {{ protocolo.nombre }} </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-offset-3">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">Codigo: </br> {{ protocolo.codigo }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">Clasificacion: </br> {{ protocolo.clasificacion.nombre_clasificacion }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">Fecha de creacion: </br> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h3>Lista de pasos:</h3>
+                    <div class="list-group">
+                        {% for paso in lista_pasos %}
+                            <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h3>Lista de insumos:</h3>
+                    <div class="list-group">
+                        {% for insumo in lista_insumos %}
+                            <a href="#" class="list-group-item">{{ insumo.nombre }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-offset-3">
+            <h3>Observaciones:</h3>
+            <div class="panel panel-default">
+                <div class="panel-body">{{ protocolo.observaciones }}</div>
+            </div>
+            <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Volver</a>
+        </div>
+
+
+    </div>
+{% endblock %}
+</body>
+</html>

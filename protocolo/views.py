@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 from django.shortcuts import render
+
 from .forms import ProtocoloForm
-from .models import Protocolo
+from .models import Protocolo, Paso
 
 
 def buscar_protocolo_vista(request):
@@ -44,3 +46,19 @@ def buscar_protocolo_vista(request):
     }
 
     return render(request, 'buscarProtocolos.html', context)
+
+
+def detalle_protocolo_vista(request, id_protocolo):
+    # Obtiene el objeto de referencia
+    protocolo = Protocolo.objects.get(id=id_protocolo)
+    # Traer los objetos relacionados
+    lista_pasos = Paso.objects.filter(protocolo=id_protocolo)
+    lista_insumos = protocolo.insumos.all()
+
+    # Subir la informacion al contexto
+    context = {
+        'protocolo': protocolo,
+        'lista_pasos': lista_pasos,
+        'lista_insumos': lista_insumos
+    }
+    return render(request, 'protocolos.html', context)
