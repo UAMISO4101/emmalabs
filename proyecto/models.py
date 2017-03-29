@@ -10,6 +10,6 @@ class Proyecto(models.Model):
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     estado = models.CharField(max_length=50, blank=True, null=True)
     fecha_creacion = models.DateTimeField(blank=True, null=True)
-    cientifico_asignado = models.OneToOneField(Usuario, related_name='cientifico_asignado', null=True)
+    cientifico_asignado = models.asistente = models.ForeignKey(Usuario, related_name='cientifico_asignado', null=True)
     experimentos = models.ManyToManyField(Experimento)
     asistentes = models.ManyToManyField(Usuario)

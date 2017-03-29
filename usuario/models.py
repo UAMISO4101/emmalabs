@@ -5,7 +5,7 @@ from django.db import models
 # Modelo de perfil de usuario que extiende al usuario Django
 class Usuario(models.Model):
     # Referencia al usuario de Django
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     # Atributos extra
     nombres = models.CharField(max_length=50, null=False)
     apellidos = models.CharField(max_length=50, null=False)
