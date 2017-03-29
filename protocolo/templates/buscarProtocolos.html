@@ -51,7 +51,7 @@
                                 <h5><b>Código:</b> {{ protocolo.codigo }}</h5>
                                 <h5><b>Nombre:</b> {{ protocolo.nombre }}</h5>
                                 <h5><b>Clasificacion:</b> {{ protocolo.clasificacion.nombre_clasificacion }}</h5>
-                                <h5><b>Fecha de creacion:</b> {{ protocolo.fecha_creacion }}</h5>
+                                <h5><b>Fecha de creacion:</b> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</h5>
                                 <a class="btn btn-primary" href="{% url 'protocolos' protocolo.id %}">Ver detalle</a>
                             </div>
                         </div>
