@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orden',
     'proyecto',
     'usuario',
+    'plantilla',
     'bootstrap3'
 ]
 
