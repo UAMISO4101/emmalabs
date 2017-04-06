@@ -16,7 +16,3 @@ def detalleProyecto(request, id):
         'proyecto': proyecto
     }
     return render(request, 'detalle_proyecto.html', context)
-
-
-def prueba_plantilla(request):
-    return render(request, 'prueba_plantilla.html')
