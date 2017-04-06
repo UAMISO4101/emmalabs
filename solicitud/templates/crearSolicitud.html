@@ -1,40 +1,52 @@
-{# Load the tag library #}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Crear Solicitud</h1>
+                        <hr class="small">
+                        <span class="subheading">Diligencie el formulario para crear una solicitud de compra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {# Load the tag library #}
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Solicitud</title>
-</head>
-<body>
-{% block content %}
-    <div class="row">
-        <div class="col-md-6 col-sm-offset-3">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
 
 
-            <div class="page-header">
-                <h2>Crear Solicitud</h2>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6 col-sm-offset-3">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" style="width: 80%">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <input type="submit" value="Guardar" class="btn btn-primary"/>
+                        {% endbuttons %}
+                    </form>
+                </div>
             </div>
-
-            <form method="post" style="width: 80%">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                    <input type="submit" value="Guardar" class="btn btn-primary"/>
-                {% endbuttons %}
-            </form>
         </div>
     </div>
+
 {% endblock %}
-</body>
-</html>
