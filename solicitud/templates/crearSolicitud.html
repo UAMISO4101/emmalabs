@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+    {# Load the tag library #}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {% block content %}
 
     <!-- Page Header -->
@@ -17,12 +22,6 @@
         </div>
     </header>
 
-    {# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 
 
 
@@ -41,7 +40,7 @@
                         {% csrf_token %}
                         {% bootstrap_form form %}
                         {% buttons %}
-                            <input type="submit" value="Guardar" class="btn btn-primary"/>
+                            <input type="submit" value="Guardar" class="btn btn-default"/>
                         {% endbuttons %}
                     </form>
                 </div>
