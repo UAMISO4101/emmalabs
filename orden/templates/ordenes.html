@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="page-header" style="margin: 0; padding: 60px 0 20px 0; color: #BBB;background-image: url('/static/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Man must explore, and this is exploration at its greatest</h1>
+                        <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                        <span class="meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    {% for proyecto in lista_proyectos %}
+                        <a class="col-md-12" href="/proyectos/{{ proyecto.id }}/">
+                            <div  class="col-md-10">
+                                <h2 class="post-title">
+                                    {{ proyecto.nombre }}
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    {{ proyecto.descripcion }}
+                                </h3>
+                            </div>
+                            <div class="col-md-2">
+                                  <img src="https://www.iag.biz/wp-content/uploads/2016/11/Flat-Icon-Set-6.png" height="100px" width="100px">
+                            </div>
+                            <p class="col-md-12 text-center post-meta">{{ proyecto.estado }} | {{ proyecto.fecha_creacion }}</p>
+                        </a>
+                        <div class="clearfix"></div>
+                        <hr>
+                    {% endfor %}
+                </div>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Ver mas &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

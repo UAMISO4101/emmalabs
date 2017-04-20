@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('orden.urls')),
     url(r'^', include('protocolo.urls')),
     url(r'^', include('proyecto.urls')),
+    url(r'^', include('orden.urls')),
     url(r'^', include('solicitud.urls')),
     url(r'^', include('usuario.urls')),
     url(r'^', include('plantilla.urls')),
