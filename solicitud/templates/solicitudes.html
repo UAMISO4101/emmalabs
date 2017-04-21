@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Lista de Solicitudes</h1>
+                        <hr class="small">
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="container">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr style="color:#0E2EB0" >
+                        <th font color = "red" >Titulo</th>
+                        <th>Fecha de creacion</th>
+                        <th>Cientifico</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for solicitud in lista_solicitudes %}
+                            <tr>
+                                <td>{{ solicitud.titulo }}</td>
+                                <td>{{ solicitud.fecha_creacion }}</td>
+                                <td>{{ solicitud.cientifico.nombres }} {{ solicitud.cientifico.apellidos }}</td>
+                                <td>{{ solicitud.estado }}</td>
+                                <td><a href="">
+                                      <img src="/static/media/lupa.png" height="40px" width="40px">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+                {% buttons %}
+                    <div style="text-align:center;">
+                        <input type="button" value="Volver" class="btn btn-default" onClick=" window.location.href='../menuSolicitud' ">
+                    </div>
+                {% endbuttons %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
