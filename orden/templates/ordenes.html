@@ -22,23 +22,24 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
-                    {% for proyecto in lista_proyectos %}
-                        <a class="col-md-12" href="/proyectos/{{ proyecto.id }}/">
+                    {% for orden in lista_ordenes %}
+                        <a class="col-md-12 orden-de-compra" style="position: relative; border: 1px solid #BBB; border-radius: 3px; float:left; width: 200px; height: 250px; margin: 5px; padding: 0; display: inline-block" href="/ordenes/{{ orden.id }}/">
                             <div  class="col-md-10">
-                                <h2 class="post-title">
-                                    {{ proyecto.nombre }}
-                                </h2>
-                                <h3 class="post-subtitle">
-                                    {{ proyecto.descripcion }}
-                                </h3>
+                                <p style="text-transform: uppercase; font-size: 10px; font-weight: bold" class="post-title">
+                                    {{ orden.nombre }}
+                                </p>
+                                <p style="font-size: 13px" class="post-subtitle">
+                                    {{ orden.descripcion }}
+                                </p>
                             </div>
-                            <div class="col-md-2">
-                                  <img src="https://www.iag.biz/wp-content/uploads/2016/11/Flat-Icon-Set-6.png" height="100px" width="100px">
-                            </div>
-                            <p class="col-md-12 text-center post-meta">{{ proyecto.estado }} | {{ proyecto.fecha_creacion }}</p>
+                            {%  if orden.estado == 0 %}
+                                <button style="margin: 0 5px;" class="btn-primary">Aprobar</button>
+                            {% else %}
+                                <a style="padding: 0 8px;font-size: 11px; font-style: italic">Aprobado</a>
+                            {% endif %}
+                            <p style="position: absolute; bottom: 20px;margin: 0; padding: 0 8px;font-size: 11px;">Solicitud: {{ orden.solicitud.nombre}}</p>
+                            <p style="position: absolute; bottom: 0;margin: 0; padding: 0 8px;font-size: 11px;">{{ orden.fecha_orden }}</p>
                         </a>
-                        <div class="clearfix"></div>
-                        <hr>
                     {% endfor %}
                 </div>
 
