@@ -33,9 +33,9 @@
                                 </p>
                             </div>
                             {%  if orden.estado == 0 %}
-                                <button style="margin: 0 5px;" class="btn-primary">Aprobar</button>
+                                <a href="/ordenes/actualizar/{{ orden.id }}" style="margin: 0 5px;" id="aprobar-orden" class="btn btn-primary">Aprobar</a>
                             {% else %}
-                                <a style="padding: 0 8px;font-size: 11px; font-style: italic">Aprobado</a>
+                                <p style="padding: 0 8px;font-size: 12px; font-style: italic;">Aprobado</p>
                             {% endif %}
                             <p style="position: absolute; bottom: 20px;margin: 0; padding: 0 8px;font-size: 11px;">Solicitud: {{ orden.solicitud.nombre}}</p>
                             <p style="position: absolute; bottom: 0;margin: 0; padding: 0 8px;font-size: 11px;">{{ orden.fecha_orden }}</p>

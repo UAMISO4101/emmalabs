@@ -10,5 +10,5 @@ class Solicitud(models.Model):
     titulo = models.CharField(max_length=40, blank=True, null=True)
     texto = models.CharField(max_length=255, blank=True, null=True)
     fecha_creacion = models.DateField(default=datetime.now, blank=True)
-    asistente = models.ForeignKey(Usuario, related_name='asistente', null=True)
-    cientifico = models.ForeignKey(Usuario, related_name='cientifico', null=True)
+    usuario_creador = models.ForeignKey(Usuario, related_name='usuario_creador', null=True)
+    usuario_destino = models.ForeignKey(Usuario, related_name='usuario_destino', null=True)
