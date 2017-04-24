@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Proyectos</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ proyecto.nombre }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <section class="align-center col-md-6 col-sm-offset-3">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <header class="page-header">
+                        <h2 class="text-center">{{ proyecto.nombre }}</h2>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Científico a cargo</td>
+                                <td>{{ proyecto.cientifico_asignado.nombres }}</td>
+                            </tr>
+                            <tr>
+                                <td>Fecha de creación</td>
+                                <td>{{ proyecto.fecha_creacion }}</td>
+                            </tr>
+                            <tr>
+                                <td>Estado del proyecto</td>
+                                <td>{{ proyecto.estado }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </header>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center"> <h3>Experimentos</h3></th>
+                        </tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>resultado</th>
+                        <th>Fecha resultado</th>
+                        <th>Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for experimento in proyecto.experimentos.all  %}
+                            <tr>
+                                <td>{{ experimento.nombre }}</td>
+                                <td>{{ experimento.estado }}</td>
+                                <td>{{ experimento.resultado }}</td>
+                                <td>{{ experimento.fecha_resultado }}</td>
+                                <!--% if experimento.resultado == 'Pendiente' %-->
+                                <td><button type="button" class="btn btn-default btn-sm" onclick="show_results({{ experimento.id }});" data-toggle="modal" data-target="#myModal">Realizar</button></td>
+                                <!--% endif %-->
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalResultado">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modalResultado">Registrar resultado</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" id="formulario" class="form text-center">
+                                        <input type="hidden" name="experimento_id" id="experimento"/>
+                                        <div class="form-group-sm">
+                                            <select class="col-md-12 form-control" name="resultado">
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Exitoso">Exitoso</option>
+                                                <option value="Fallido">Fallido</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-default btn-sm" form="formulario">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function show_results(id){
+                            $('#experimento').val(id);
+                        }
+                    </script>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
