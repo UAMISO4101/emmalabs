@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+import usuario.views as UsuarioView
 from usuario.models import LoginForm
 
 
@@ -7,7 +8,15 @@ from usuario.models import LoginForm
 
 def index(request):
     form_login = LoginForm()
-    context = {'form_login': form_login, }
+    lista_permisos = []
+
+    if request.user.is_authenticated:
+        lista_permisos = UsuarioView.crearMenu(request.user)
+
+    context = {'form_login': form_login,
+               'lista_permisos': lista_permisos
+               }
+
     return render(request, 'index.html', context)
 
 

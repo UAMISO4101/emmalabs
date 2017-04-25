@@ -52,31 +52,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {% if not user.is_authenticated %}
+                {% if user.is_authenticated %}
+                    {% for item in lista_permisos %}
+                        <li>
+                            <a href="#">{{ item }}</a>
+                        </li>
+                    {% endfor %}
                     <li>
-                        <a href="#" id="id_login">Iniciar Sesión</a>
+                        <a href="logout">Logout</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/index.html">Inicio</a>
-                    </li>
-                    <li>
-                        <a href="/proyectos">Proyectos</a>
-                    </li>
-                    <li>
-                        <a href="/crearSolicitud">Solicitudes</a>
-                    </li>
-                    <li>
-                        <a href="/post.html">Noticias</a>
-                    </li>
-                    <li>
-                        <a href="/about.html">Acerca de</a>
-                    </li>
-                    <li>
-                        <a href="/contact.html">Contacto</a>
-                    </li>
-                    <li>
-                        <a href="logout">Logout</a>
+                        <a href="#" id="id_login">Iniciar Sesión</a>
                     </li>
                 {% endif %}
 

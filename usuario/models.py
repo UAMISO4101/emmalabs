@@ -6,6 +6,11 @@ from django.db import models
 from django.forms import ModelForm
 
 
+class Rol(models.Model):
+    rol = models.CharField(max_length=100, null=False)
+    descripcion = models.CharField(max_length=2000, null=False)
+
+
 class Usuario(models.Model):
     # Referencia al usuario de Django
     user = models.ForeignKey(User)
@@ -15,10 +20,20 @@ class Usuario(models.Model):
     pais = models.CharField(max_length=50, null=True)
     ciudad = models.CharField(max_length=50, null=True)
     intereses = models.CharField(max_length=200, null=False)
-    rol = models.CharField(max_length=200, null=False)
+    rol_usuario = models.ForeignKey(Rol)
 
     def __str__(self):
         return '{}'.format(self.nombres)
+
+
+class MenuPorRol(models.Model):
+    rol = models.ForeignKey(Rol)
+    menu = models.CharField(max_length=100, null=False)
+    opcion = models.CharField(max_length=100, null=False)
+    template = models.CharField(max_length=500, null=False)
+
+    class Meta:
+        unique_together = ('rol', 'menu', 'opcion')
 
 
 class LoginForm(ModelForm):
