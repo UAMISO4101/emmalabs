@@ -4,7 +4,6 @@ from django.contrib import messages
 from experimento.models import Experimento
 from proyecto.models import Proyecto
 from protocolo.models import Protocolo
-from resultado.models import Resultado
 
 def registrarMezcla(request, id):
     if(request.method == "POST"):
@@ -16,19 +15,9 @@ def registrarMezcla(request, id):
         proyecto = request.POST['proyecto']
         experimento = request.POST['experimento']
         protocolo = request.POST['protocolo']
-
-        resultado = Resultado()
-        resultado.resultado = resultados
-        resultado.satisfactorio = satisfactorio
-        resultado.observaciones = obrevaciones
-        resultado.fecha_resultado = fecha
-        resultado.proyecto = Proyecto.objects.get(id=proyecto)
-        resultado.experimento = Experimento.objects.get(id=experimento)
-        resultado.protocolo = Protocolo.objects.get(id=protocolo)
-        resultado.save()
         messages.success(request, "Resultado guardado", extra_tags="alert-success")
 
-    experimento = Experimento.objects.get(id=id)
+    experimento = Experimento.objects.all()
     proyectos = Proyecto.objects.all()
     protocolos = Protocolo.objects.all()
     context = {
