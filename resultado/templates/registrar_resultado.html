@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Registro de resultados</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ proyecto.nombre }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <section class="align-center col-md-6 col-sm-offset-3">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} float-message">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}{% endif %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}{% endif %}
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post" id="formulario" class="form text-left">
+                        <h2 class="text-center">{{ experimento.nombre }}</h2>
+                        <input type="hidden" name=experimento value="{{ experimento.id }}">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Proyecto</td>
+                                    <td>
+                                        <select name="proyecto" class="col-md-12 form-control" name="resultado">
+                                            {% for pro in proyectos %}
+                                                <option value="{{ pro.id }}">{{ pro.nombre }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de registro</td>
+                                    <td><input name="fecha" type="date"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Protocolo utilizado</td>
+                                    <td>
+                                        <select name="protocolo" class="col-md-12 form-control" name="resultado">
+                                            {% for prot in protocolos %}
+                                                <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Resultados</td>
+                                    <td><input name="resultados" type="text"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Satisfactorio</td>
+                                    <td>
+                                        <input type="radio" name="satisfactorio" value="True"/> Si<br>
+                                        <input type="radio" name="satisfactorio" value="False"/> No
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Observaciones</td>
+                                    <td><input name="obrevaciones" type="text"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">
+                                        <button type="submit" class="btn btn-default btn-sm" form="formulario">Guardar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>                
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
