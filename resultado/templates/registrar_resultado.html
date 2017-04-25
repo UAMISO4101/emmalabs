@@ -24,17 +24,24 @@
                 <section class="align-center col-md-6 col-sm-offset-3">
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                            <div class="alert {{ message.tags }} float-message">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}{% endif %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}{% endif %}
+                                {{ message }}
+                            </div>
                         {% endfor %}
                     {% endif %}
                     <form method="post" id="formulario" class="form text-left">
                         <h2 class="text-center">{{ experimento.nombre }}</h2>
+                        <input type="hidden" name=experimento value="{{ experimento.id }}">
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <td>Proyecto</td>
                                     <td>
-                                        <select class="col-md-12 form-control" name="resultado">
+                                        <select name="proyecto" class="col-md-12 form-control" name="resultado">
                                             {% for pro in proyectos %}
                                                 <option value="{{ pro.id }}">{{ pro.nombre }}</option>
                                             {% endfor %}
@@ -43,12 +50,12 @@
                                 </tr>
                                 <tr>
                                     <td>Fecha de registro</td>
-                                    <td><input type="date" name=""/></td>
+                                    <td><input name="fecha" type="date"/></td>
                                 </tr>
                                 <tr>
                                     <td>Protocolo utilizado</td>
                                     <td>
-                                        <select class="col-md-12 form-control" name="resultado">
+                                        <select name="protocolo" class="col-md-12 form-control" name="resultado">
                                             {% for prot in protocolos %}
                                                 <option value="{{ prot.id }}">{{ prot.nombre }}</option>
                                             {% endfor %}
@@ -57,18 +64,18 @@
                                 </tr>
                                 <tr>
                                     <td>Resultados</td>
-                                    <td><input type="text"/></td>
+                                    <td><input name="resultados" type="text"/></td>
                                 </tr>
                                 <tr>
                                     <td>Satisfactorio</td>
                                     <td>
-                                        <input type="radio" name="gender" value="true"> Si<br>
-                                        <input type="radio" name="gender" value="false"> No
+                                        <input type="radio" name="satisfactorio" value="True"/> Si<br>
+                                        <input type="radio" name="satisfactorio" value="False"/> No
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Observaciones</td>
-                                    <td><input type="text"/></td>
+                                    <td><input name="obrevaciones" type="text"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right">
