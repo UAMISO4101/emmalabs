@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Orden No. {{ orden.id }}</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ orden.nombre }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <section class="align-center col-md-6 col-sm-offset-3">
+                    <div class="form-group">
+                        <label for="email">Fecha de Creación</label>
+                        <p>{{ orden.fecha_orden }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Descripción:</label>
+                        <p>{{ orden.descripcion }}</p>
+                    </div>
+                    <div class="form-group">
+                        {%  if orden.estado == 0 %}
+                            <a value="Aprobar" href="/ordenes/actualizar/{{ orden.id }}" style="margin: 0 5px;" class="btn btn-primary">Aprobar</a>
+                        {% else %}
+                            <a style="padding: 0 8px;font-size: 13px; font-style: italic">Aprobado</a>
+                        {% endif %}
+                    </div>
+                    <input type="button" value="Volver" class="btn btn-default" onClick=" window.location.href='../../' ">
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

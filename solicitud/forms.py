@@ -11,14 +11,14 @@ class SolicitudForm(forms.ModelForm):
         fields = [
             'titulo',
             'texto',
-            'asistente',
-            'cientifico',
+            'usuario_creador',
+            'usuario_destino',
         ]
         labels = {
             'titulo' : 'Titulo',
             'texto' : 'Texto',
-            'asistente' : 'Asistente',
-            'cientifico' : 'Cientifico',
+            'usuario_creador' : 'Asistente',
+            'usuario_destino' : 'Cientifico',
         }
         widgets = {
             'texto': forms.Textarea,
