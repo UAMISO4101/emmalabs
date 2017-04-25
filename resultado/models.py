@@ -7,5 +7,6 @@ class Resultado(models.Model):
     satisfactorio = models.BooleanField()
     observaciones = models.CharField(max_length=50, blank=True, null=True)
     fecha_resultado = models.DateTimeField(blank=True, null=True)
+    proyecto = models.ForeignKey(Protocolo, related_name="proyecto")
     experimento = models.ForeignKey(Experimento, related_name="experimento")
     protocolo = models.ForeignKey(Protocolo, related_name="protocolo")

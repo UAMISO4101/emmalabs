@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Registro de resultados</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ proyecto.nombre }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <section class="align-center col-md-6 col-sm-offset-3">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post" id="formulario" class="form text-left">
+                        <h2 class="text-center">{{ experimento.nombre }}</h2>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Proyecto</td>
+                                    <td>
+                                        <select class="col-md-12 form-control" name="resultado">
+                                            {% for pro in proyectos %}
+                                                <option value="{{ pro.id }}">{{ pro.nombre }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de registro</td>
+                                    <td><input type="date" name=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Protocolo utilizado</td>
+                                    <td>
+                                        <select class="col-md-12 form-control" name="resultado">
+                                            {% for prot in protocolos %}
+                                                <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Resultados</td>
+                                    <td><input type="text"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Satisfactorio</td>
+                                    <td>
+                                        <input type="radio" name="gender" value="true"> Si<br>
+                                        <input type="radio" name="gender" value="false"> No
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Observaciones</td>
+                                    <td><input type="text"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">
+                                        <button type="submit" class="btn btn-default btn-sm" form="formulario">Guardar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>                
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
