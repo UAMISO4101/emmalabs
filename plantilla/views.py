@@ -3,7 +3,6 @@ from django.shortcuts import render
 import usuario.views as UsuarioView
 from usuario.models import LoginForm, Usuario
 
-
 # Create your views here.
 
 def index(request):
