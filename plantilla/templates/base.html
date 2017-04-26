@@ -69,9 +69,19 @@
                             </div>
                         </li>
                     {% endfor %}
-                    <li>
-                        <a href="logout">Cerrar Sesión</a>
-                    </li>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" id="sesion">
+                            Sesión <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                           
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="logout" style="color: #333;">Cerrar Sesión</a>
+                            </li>
+                        </ul>
+                    </div>
                 {% else %}
                     <li>
                         <a href="#" id="id_login">Iniciar Sesión</a>
