@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render
 from solicitud.models import TipoSolicitud
-from usuario.models import LoginForm
+from usuario.models import LoginForm, Rol
 from usuario.models import Usuario
 from insumo.models import Insumo
 from protocolo.models import ClasificacionProtocolo
@@ -47,6 +47,16 @@ def inicializarDatos():
     try:
         with transaction.atomic():
             if (Proyecto.objects.all().count() == 0):
+                rol1 = Rol()
+                rol1.rol = "rol_cientifico"
+                rol1.descripcion = "rol_cientifico"
+                rol1.save()
+
+                rol2 = Rol()
+                rol2.rol = "rol_asistente"
+                rol2.descripcion = "rol_asistente"
+                rol2.save()
+
                 user1 = User()
                 user1.username = "cientifico"
                 user1.password = "pbkdf2_sha256$30000$pYq6s9qQGJjg$HKurLl0z+LYBfyW/q4rEClXwapFjx5W5pKwXwGAobdE="
@@ -59,7 +69,7 @@ def inicializarDatos():
                 usuario1.pais = "cientifico"
                 usuario1.ciudad = "cientifico"
                 usuario1.intereses = "cientifico"
-                usuario1.rol = "cientifico"
+                usuario1.rol_usuario = rol1
                 usuario1.save()
 
                 user2 = User()
@@ -74,7 +84,7 @@ def inicializarDatos():
                 usuario2.pais = "asistente"
                 usuario2.ciudad = "asistente"
                 usuario2.intereses = "asistente"
-                usuario2.rol = "asistente"
+                usuario2.rol_usuario = rol2
                 usuario2.save()
 
                 insumo1 = Insumo()
@@ -141,5 +151,5 @@ def inicializarDatos():
                 tipoSolicitud = TipoSolicitud()
                 tipoSolicitud.nombre = "Compra"
                 tipoSolicitud.save()
-    except :
-        print("erroooor")
+    except:
+        pass
