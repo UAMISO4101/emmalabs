@@ -19,46 +19,43 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <section class="align-center col-md-6 col-sm-offset-3">
+        <div class="">
+
                     {% if messages %}
                         {% for message in messages %}
                             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
                         {% endfor %}
                     {% endif %}
 
-                    <header class="page-header">
-                        <h2 class="text-center">{{ proyecto.nombre }}</h2>
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <td>Científico a cargo</td>
-                                <td>{{ proyecto.cientifico_asignado.nombres }}</td>
-                            </tr>
-                            <tr>
-                                <td>Fecha de creación</td>
-                                <td>{{ proyecto.fecha_creacion }}</td>
-                            </tr>
-                            <tr>
-                                <td>Estado del proyecto</td>
-                                <td>{{ proyecto.estado }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </header>
+                    <h2 class="text-center">{{ proyecto.nombre }}</h2>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Científico a cargo</td>
+                            <td>{{ proyecto.cientifico_asignado.nombres }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de creación</td>
+                            <td>{{ proyecto.fecha_creacion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Estado del proyecto</td>
+                            <td>{{ proyecto.estado }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+
+                    <br/><br/>
+
+                    <h2 class="text-center">Experimentos</h2>
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th colspan="5" class="text-center"> <h3>Experimentos</h3></th>
-                        </tr>
-                        <th>Nombre</th>
-                        <th>Estado</th>
-                        <th>resultado</th>
-                        <th>Fecha resultado</th>
-                        <th>Opciones</th>
-                        </tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>resultado</th>
+                            <th>Fecha resultado</th>
+                            <th colspan="2">Opciones</th>
                         </thead>
                         <tbody>
                         {% for experimento in proyecto.experimentos.all  %}
@@ -67,9 +64,10 @@
                                 <td>{{ experimento.estado }}</td>
                                 <td>{{ experimento.resultado }}</td>
                                 <td>{{ experimento.fecha_resultado }}</td>
-                                <!--% if experimento.resultado == 'Pendiente' %-->
-                                <td><button type="button" class="btn btn-default btn-sm" onclick="show_results({{ experimento.id }});" data-toggle="modal" data-target="#myModal">Realizar</button></td>
-                                <!--% endif %-->
+                                <td><button type="button" class="btn btn-default" onclick="show_results({{ experimento.id }});" data-toggle="modal" data-target="#myModal">Realizar</button></td>
+                                {% if experimento.resultado != none %}
+                                    <td><a href="/registrar_resultado/{{ experimento.id }}" class="btn btn-default btn-sm">Agregar resultados</a></td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -110,8 +108,6 @@
                         }
                     </script>
 
-                </section>
-            </div>
         </div>
     </div>
 

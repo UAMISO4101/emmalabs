@@ -3,7 +3,7 @@
 {% block content %}
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('/static/img/resultados.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -38,55 +38,68 @@
                         <input type="hidden" name=experimento value="{{ experimento.id }}">
                         <table class="table">
                             <tbody>
-                                <tr>
-                                    <td>Proyecto</td>
-                                    <td>
-                                        <select name="proyecto" class="col-md-12 form-control">
-                                            {% for pro in proyectos %}
-                                                <option value="{{ pro.id }}">{{ pro.nombre }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Fecha de registro</td>
-                                    <td><input name="fecha" type="date"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Protocolo utilizado</td>
-                                    <td>
-                                        <select name="protocolo" class="col-md-12 form-control">
-                                            {% for prot in protocolos %}
-                                                <option value="{{ prot.id }}">{{ prot.nombre }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Resultados</td>
-                                    <td><input name="resultados" type="text"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Satisfactorio</td>
-                                    <td>
-                                        <input type="radio" name="satisfactorio" value="True"/> Si<br>
-                                        <input type="radio" name="satisfactorio" value="False"/> No
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Observaciones</td>
-                                    <td><input name="obrevaciones" type="text"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="text-right">
-                                        <button type="submit" class="btn btn-default btn-sm" form="formulario">Guardar</button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>Proyecto</td>
+                                <td>
+                                    <select name="proyecto" class="col-md-12 form-control">
+                                        {% for pro in proyectos %}
+                                            <option value="{{ pro.id }}">{{ pro.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fecha de registro</td>
+                                <td>
+                                    <div class="input-group input-append date" id="dp3"  data-date-format="yyyy-mm-dd">
+                                        <input name="fecha" class="form-control span2" size="16" type="text" >
+                                        <span class="input-group-addon add-on"><i class=" glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Protocolo utilizado</td>
+                                <td>
+                                    <select name="protocolo" class="col-md-12 form-control">
+                                        {% for prot in protocolos %}
+                                            <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Resultados</td>
+                                <td><input name="resultados" type="text"/></td>
+                            </tr>
+                            <tr>
+                                <td>Satisfactorio</td>
+                                <td>
+                                    <input type="radio" name="satisfactorio" value="True"/> Si<br>
+                                    <input type="radio" name="satisfactorio" value="False"/> No
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Observaciones</td>
+                                <td><input name="obrevaciones" type="text"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <button type="submit" class="btn btn-default btn-sm" form="formulario">Guardar</button>
+                                    <a href="/registrar_resultado/{{ experimento.id }}" class="btn btn-default btn-sm">Agregar mezcla</a>
+                                </td>
+                            </tr>
                             </tbody>
-                        </table>                
+                        </table>
                     </form>
                 </section>
             </div>
+
+            <script>
+                    $('#dp3').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            </script>
+
         </div>
     </div>
 

@@ -30,32 +30,3 @@
         </div>
     </div>
 </div>
-<!--suppress JSUnresolvedFunction -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        var validator = $("#login-form").validate({
-            rules: {
-                username: "required",
-                password: "required",
-            },
-            messages: {
-                username: "Por favor ingrese su usuario",
-                password: "Por favor ingrese su password",
-                confirmar: {
-                    equalTo: "La confirmaci&oacute;n no es v&aacute;lida"
-                }
-            },
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-        $('#imagen').click(function () {
-            alert($('input[type=file]').val());
-            return true;
-
-        });
-        $('#register_modal').on('hidden.bs.modal', function () {
-            validator.resetForm();
-        })
-    });
-</script>
