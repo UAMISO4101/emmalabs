@@ -29,11 +29,13 @@ def registrarResultado(request, id):
         messages.success(request, "Resultado guardado", extra_tags="alert-success")
 
     experimento = Experimento.objects.get(id=id)
+    resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
     protocolos = Protocolo.objects.all()
     context = {
         'experimento': experimento,
         'proyectos' : proyectos,
-        'protocolos' : protocolos
+        'protocolos' : protocolos,
+        'resultados' : resultados
     }
     return render(request, 'registrar_resultado.html', context)
