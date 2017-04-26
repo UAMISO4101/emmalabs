@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -10,17 +11,20 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('resultado', '0001_initial'),
+        ('insumo', '0001_initial'),
+        ('maquina', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Insumo',
+            name='Mezcla',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nombre', models.CharField(blank=True, max_length=50, null=True)),
                 ('descripcion', models.CharField(blank=True, max_length=50, null=True)),
-                ('cantidad', models.IntegerField(default=1)),
-                ('unidades', models.CharField(default=b'Unidades', max_length=20)),
+                ('insumos', models.ManyToManyField(to='insumo.Insumo')),
+                ('maquina', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='maquina.Maquina')),
+                ('resultado', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='resultado.Resultado')),
             ],
         ),
     ]

@@ -14,13 +14,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Insumo',
+            name='Maquina',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(blank=True, max_length=50, null=True)),
                 ('descripcion', models.CharField(blank=True, max_length=50, null=True)),
-                ('cantidad', models.IntegerField(default=1)),
-                ('unidades', models.CharField(default=b'Unidades', max_length=20)),
             ],
         ),
     ]
