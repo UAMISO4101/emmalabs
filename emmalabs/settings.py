@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'proyecto',
     'usuario',
     'plantilla',
+    'resultado',
+    'mezcla',
+    'maquina',
     'bootstrap3'
 ]
 

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="page-header" style="margin: 0; padding: 60px 0 20px 0; color: #BBB;background-image: url('/static/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Man must explore, and this is exploration at its greatest</h1>
+                        <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                        <span class="meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    {% for orden in lista_ordenes %}
+                        <a class="col-md-12 orden-de-compra" style="position: relative; border: 1px solid #BBB; border-radius: 3px; float:left; width: 200px; height: 250px; margin: 5px; padding: 0; display: inline-block" href="/ordenes/{{ orden.id }}/">
+                            <div  class="col-md-10">
+                                <p style="text-transform: uppercase; font-size: 10px; font-weight: bold" class="post-title">
+                                    {{ orden.nombre }}
+                                </p>
+                                <p style="font-size: 13px" class="post-subtitle">
+                                    {{ orden.descripcion }}
+                                </p>
+                            </div>
+                            {%  if orden.estado == 0 %}
+                                <a href="/ordenes/actualizar/{{ orden.id }}" style="margin: 0 5px;" id="aprobar-orden" class="btn btn-primary">Aprobar</a>
+                            {% else %}
+                                <p style="padding: 0 8px;font-size: 12px; font-style: italic;">Aprobado</p>
+                            {% endif %}
+                            <p style="position: absolute; bottom: 20px;margin: 0; padding: 0 8px;font-size: 11px;">Solicitud: {{ orden.solicitud.nombre}}</p>
+                            <p style="position: absolute; bottom: 0;margin: 0; padding: 0 8px;font-size: 11px;">{{ orden.fecha_orden }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Ver mas &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

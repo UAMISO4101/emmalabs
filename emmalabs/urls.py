@@ -26,9 +26,12 @@ urlpatterns = [
     url(r'^', include('orden.urls')),
     url(r'^', include('protocolo.urls')),
     url(r'^', include('proyecto.urls')),
+    url(r'^', include('orden.urls')),
     url(r'^', include('solicitud.urls')),
     url(r'^', include('usuario.urls')),
     url(r'^', include('plantilla.urls')),
+    url(r'^', include('resultado.urls')),
+    url(r'^', include('mezcla.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

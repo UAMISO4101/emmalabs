@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Solicitudes</h1>
+                        <hr class="small">
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-10 col-sm-offset-1">
+                    <div class="post-preview">
+
+                        <a class="col-md-6" href="/crearSolicitud">
+                            <div class="col-md-12" align="center">
+                                  <img align=center src="/static/media/solicitud.png" height="200px" width="200px">
+                            </div>
+                            <div  class="col-md-12" align="center">
+                                <h2 class="post-title">
+                                    Crear Solicitud
+                                </h2>
+                            </div>
+                            <p class="col-md-12 text-center post-meta">Crea una Solicitud</p>
+                        </a>
+
+                        <a class="col-md-6" href="/solicitudes">
+                            <div class="col-md-12" align="center" >
+                                  <img src="/static/media/lista.png" height="200px" width="200px">
+                            </div>
+                            <div  class="col-md-12" align="center">
+                                <h2 class="post-title">
+                                    Lista de Solicitudes
+                                </h2>
+                            </div>
+                            <p class="col-md-12 text-center post-meta">Revisa tus solicitudes</p>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
