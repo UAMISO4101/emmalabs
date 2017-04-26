@@ -5,7 +5,6 @@ EasyProcess==0.2.3
 olefile==0.44
 Pillow==4.1.0
 psycopg2==2.7.1
-pygobject==3.20.0
 pytz==2017.2
 PyVirtualDisplay==0.2.1
 selenium==3.4.0
