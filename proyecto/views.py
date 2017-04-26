@@ -15,4 +15,5 @@ def proyectos(request):
         lista_proyectos = Proyecto.objects.filter(asistentes__user__usuario=usuario_parametro.id)
 
     context = {'lista_proyectos': lista_proyectos}
+    
     return render(request, 'proyectos.html', context)
