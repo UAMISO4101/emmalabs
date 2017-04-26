@@ -1,10 +1,13 @@
-adium-theme-ubuntu==0.3.4
 dj-database-url==0.4.2
 Django==1.11
 django-bootstrap3==8.2.2
+EasyProcess==0.2.3
+meld==3.14.2
 olefile==0.44
 Pillow==4.1.0
 psycopg2==2.7.1
 pygobject==3.20.0
 pytz==2017.2
+PyVirtualDisplay==0.2.1
+selenium==3.4.0
 unity-lens-photos==1.0
