@@ -60,5 +60,26 @@ class FunctionalTest(TestCase):
         botonSesion = self.browser.find_element_by_id('sesion')
         botonSesion.click()
 
-        label_usuario = self.browser.find_element_by_id('user')
-        self.assertIn('USUARIO: CIENTIFICO', label_usuario.text)
+        label_usuario = self.browser.find_element_by_id('perfil')
+        self.assertIn('PERFIL: CIENTIFICO', label_usuario.text)
+
+    def test_3_perfil_jefe(self):
+        self.browser.get('http://localhost:8000')
+        link = self.browser.find_element_by_id('id_login')
+        link.click()
+
+
+        login_usuario = self.browser.find_element_by_id('id_username_login')
+        login_usuario.send_keys('jefe')
+
+        login_clave = self.browser.find_element_by_id('id_password_login')
+        login_clave.send_keys('1a2s3d4f5g')
+
+        botonIngresar = self.browser.find_element_by_id('btn_login')
+        botonIngresar.click()
+
+        botonSesion = self.browser.find_element_by_id('sesion')
+        botonSesion.click()
+
+        label_usuario = self.browser.find_element_by_id('perfil')
+        self.assertIn('PERFIL: JEFE', label_usuario.text)
