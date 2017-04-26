@@ -37,7 +37,8 @@
 <body>
 {% include "login.html" %}
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+{#<nav class="navbar navbar-default navbar-custom navbar-fixed-top">#}
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" style="background-color: black">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -53,13 +54,23 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    {% for item in lista_permisos %}
+                    {% for obj in lista_menu %}
                         <li>
-                            <a href="#">{{ item }}</a>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">{{ obj.menu }}<span
+                                        class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% for op in obj.opciones %}
+                                        <li><a href="{{ op.template }}">{{ op.opcion }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </li>
                     {% endfor %}
                     <li>
-                        <a href="logout">Logout</a>
+                        <a href="logout">Cerrar Sesión</a>
                     </li>
                 {% else %}
                     <li>

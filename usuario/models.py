@@ -26,6 +26,16 @@ class Usuario(models.Model):
         return '{}'.format(self.nombres)
 
 
+class OpcionMenu(object):
+    opcion = ''
+    template = ''
+
+
+class ItemMenu(object):
+    menu = ''
+    opciones = []
+
+
 class MenuPorRol(models.Model):
     rol = models.ForeignKey(Rol)
     menu = models.CharField(max_length=100, null=False)
