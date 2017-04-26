@@ -99,16 +99,15 @@ def inicializarDatos():
 			experimento1.nombre = "experimento1"
 			experimento1.descripcion = "experimento1"
 			experimento1.estado = "experimento1"
-			experimento1.resultado = "experimento1"
 			experimento1.fecha_resultado = "2017-01-01"
 			experimento1.save()
 			experimento1.protocolos.add(protocolo1)
 			experimento1.save()
 
 			proyecto1 = Proyecto()
-			proyecto1.nombre = "proyecto1"
-			proyecto1.descripcion = "proyecto1"
-			proyecto1.estado = "proyecto1"
+			proyecto1.nombre = "Proyecto Umbrella"
+			proyecto1.descripcion = "Proyecto para creacion de armas quimicas"
+			proyecto1.estado = 'Activo'
 			proyecto1.fecha_creacion = "2017-01-01"
 			proyecto1.cientifico_asignado = usuario1
 			proyecto1.save()
