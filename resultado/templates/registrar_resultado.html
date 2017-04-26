@@ -41,7 +41,7 @@
                                 <tr>
                                     <td>Proyecto</td>
                                     <td>
-                                        <select name="proyecto" class="col-md-12 form-control" name="resultado">
+                                        <select name="proyecto" class="col-md-12 form-control">
                                             {% for pro in proyectos %}
                                                 <option value="{{ pro.id }}">{{ pro.nombre }}</option>
                                             {% endfor %}
@@ -55,7 +55,7 @@
                                 <tr>
                                     <td>Protocolo utilizado</td>
                                     <td>
-                                        <select name="protocolo" class="col-md-12 form-control" name="resultado">
+                                        <select name="protocolo" class="col-md-12 form-control">
                                             {% for prot in protocolos %}
                                                 <option value="{{ prot.id }}">{{ prot.nombre }}</option>
                                             {% endfor %}

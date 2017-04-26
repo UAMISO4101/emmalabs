@@ -34,48 +34,45 @@
                         {% endfor %}
                     {% endif %}
                     <form method="post" id="formulario" class="form text-left">
-                        <h2 class="text-center">{{ experimento.nombre }}</h2>
-                        <input type="hidden" name=experimento value="{{ experimento.id }}">
+                        <h2 class="text-center">{{ resultado.proyecto.nombre }}</h2>
+                        <input type="hidden" name=resultado value="{{ resultado.id }}">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Proyecto</td>
+                                    <td>Experimento</td>
                                     <td>
-                                        <select name="proyecto" class="col-md-12 form-control" name="resultado">
-                                            {% for pro in proyectos %}
-                                                <option value="{{ pro.id }}">{{ pro.nombre }}</option>
+                                        {{ resultado.experimento.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Protocolo</td>
+                                    <td>
+                                        {{ resultado.protocolo.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Insumos utilizados</td>
+                                    <td>
+                                        <select name="insumo" class="col-md-12 form-control">
+                                            {% for insu in insumos %}
+                                                <option value="{{ insu.id }}">{{ insu.nombre }}</option>
                                             {% endfor %}
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Fecha de registro</td>
-                                    <td><input name="fecha" type="date"/></td>
+                                    <td>Descripcion</td>
+                                    <td><input name="descripcion" type="text"/></td>
                                 </tr>
                                 <tr>
-                                    <td>Protocolo utilizado</td>
+                                    <td>Maquina contenedora</td>
                                     <td>
-                                        <select name="protocolo" class="col-md-12 form-control" name="resultado">
-                                            {% for prot in protocolos %}
-                                                <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                        <select name="maquina" class="col-md-12 form-control">
+                                            {% for maq in maquinas %}
+                                                <option value="{{ maq.id }}">{{ maq.nombre }}</option>
                                             {% endfor %}
                                         </select>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>Resultados</td>
-                                    <td><input name="resultados" type="text"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Satisfactorio</td>
-                                    <td>
-                                        <input type="radio" name="satisfactorio" value="True"/> Si<br>
-                                        <input type="radio" name="satisfactorio" value="False"/> No
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Observaciones</td>
-                                    <td><input name="obrevaciones" type="text"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right">

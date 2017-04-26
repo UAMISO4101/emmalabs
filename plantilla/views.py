@@ -8,6 +8,7 @@ from protocolo.models import ClasificacionProtocolo
 from protocolo.models import Protocolo
 from experimento.models import Experimento
 from proyecto.models import Proyecto
+from maquina.models import Maquina
 from django.contrib.auth.models import User
 
 def index(request):
@@ -113,5 +114,15 @@ def inicializarDatos():
 				proyecto1.experimentos.add(experimento1)
 				proyecto1.asistentes.add(usuario2)
 				proyecto1.save()
+
+				maquina1 = Maquina()
+				maquina1.nombre = "maquina1"
+				maquina1.descripcion = "maquina1"
+				maquina1.save()
+
+				maquina2 = Maquina()
+				maquina2.nombre = "maquina2"
+				maquina2.descripcion = "maquina2"
+				maquina2.save()
 	except SomeError:
 		handle_exception()
