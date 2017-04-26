@@ -38,7 +38,7 @@ def menu_solicitud(request):
 # Vista para listar las solicitudes del usuario
 def listar_solicitudes(request):
     usuario = Usuario.objects.get(user = request.user)
-    if usuario.rol == "Asistente":
+    if usuario.rol_usuario.rol == "rol_asistente":
         # Se filtran las solicitudes por usuario creador
         lista_solicitudes = Solicitud.objects.filter(usuario_creador=usuario).order_by('-fecha_creacion')
     else:
@@ -81,7 +81,7 @@ def ver_Solicitud(request, id):
     else:
         usuario = Usuario.objects.get(user=request.user)
         solicitud = Solicitud.objects.get(id=id)
-        if usuario.rol != "Asistente" and solicitud.estado == "Pendiente":
+        if usuario.rol_usuario.rol != "rol_asistente" and solicitud.estado == "Pendiente":
             form = OrdenForm()
             context = {
                 'solicitud': solicitud,

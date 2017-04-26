@@ -40,6 +40,7 @@ def crearMenu(user_param):
 
     # Cargar el usuario activo
     usuario_parametro = Usuario.objects.get(user_id=user_param.id)
+    print("ID Usuario=", user_param.id, "Rol_id=", usuario_parametro.rol_usuario.id)
 
     # Consultar encabezados del menu segun el rol del usuario
     consulta_encabezados = MenuPorRol.objects.filter(rol=usuario_parametro.rol_usuario.id)
