@@ -108,7 +108,7 @@
                                 {% for res in resultados %}
                                     <tr>
                                         <td>{{ res.detalle_resultado }}</td>
-                                        <td>{{ res.satisfactorio }}</td>
+                                        <td>{% if res.satisfactorio %}Si{% else %}No{% endif %}</td>
                                         <td>{{ res.observaciones }}</td>
                                         <td class="text-center"><a href="/registrar_mezcla/{{ res.id }}" class="btn btn-default btn-sm">Agregar mezcla</a></td>
                                     </tr>
