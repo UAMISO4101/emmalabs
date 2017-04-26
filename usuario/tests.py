@@ -1,4 +1,3 @@
-
 from __future__ import absolute_import
 
 import os
@@ -7,6 +6,7 @@ from unittest import TestCase
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 
 class FunctionalTest(TestCase):
     def setUp(self):
@@ -25,7 +25,6 @@ class FunctionalTest(TestCase):
         self.browser.get('http://localhost:8000')
         link = self.browser.find_element_by_id('id_login')
         link.click()
-
 
         login_usuario = self.browser.find_element_by_id('id_username_login')
         login_usuario.send_keys('santiago')
@@ -47,7 +46,6 @@ class FunctionalTest(TestCase):
         link = self.browser.find_element_by_id('id_login')
         link.click()
 
-
         login_usuario = self.browser.find_element_by_id('id_username_login')
         login_usuario.send_keys('cientifico')
 
@@ -67,7 +65,6 @@ class FunctionalTest(TestCase):
         self.browser.get('http://localhost:8000')
         link = self.browser.find_element_by_id('id_login')
         link.click()
-
 
         login_usuario = self.browser.find_element_by_id('id_username_login')
         login_usuario.send_keys('jefe')
