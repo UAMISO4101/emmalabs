@@ -18,44 +18,17 @@
                     {% endfor %}
                 </div>
                 <div class="modal-footer btn-toolbar">
-                    <button type="submit" id="btn_login" class="btn btn-default btn-success pull-right">
-                        <span class="glyphicon glyphicon-save"></span>Ingresar
+                    <button type="submit" id="btn_login" class="btn btn-default btn-success">
+                        Ingresar
+                        <span class="glyphicon glyphicon-ok"></span>
                     </button>
                     <button type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"
                             style="margin-left: 5px">
-                        <span class="glyphicon glyphicon-remove"></span>Cancelar
+                        Cancelar
+                        <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!--suppress JSUnresolvedFunction -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        var validator = $("#login-form").validate({
-            rules: {
-                username: "required",
-                password: "required",
-            },
-            messages: {
-                username: "Por favor ingrese su usuario",
-                password: "Por favor ingrese su password",
-                confirmar: {
-                    equalTo: "La confirmaci&oacute;n no es v&aacute;lida"
-                }
-            },
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-        $('#imagen').click(function () {
-            alert($('input[type=file]').val());
-            return true;
-
-        });
-        $('#register_modal').on('hidden.bs.modal', function () {
-            validator.resetForm();
-        })
-    });
-</script>

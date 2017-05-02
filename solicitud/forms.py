@@ -10,15 +10,15 @@ class SolicitudForm(forms.ModelForm):
 
         fields = [
             'titulo',
+            'tipo',
             'texto',
-            'usuario_creador',
             'usuario_destino',
         ]
         labels = {
             'titulo' : 'Titulo',
-            'texto' : 'Texto',
-            'usuario_creador' : 'Asistente',
-            'usuario_destino' : 'Cientifico',
+            'tipo' : 'Tipo de solicitud',
+            'texto' : 'Mensaje',
+            'usuario_destino' : 'Dirigido a',
         }
         widgets = {
             'texto': forms.Textarea,

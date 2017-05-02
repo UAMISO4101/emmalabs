@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import dj_database_url
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project like this: os.path.join(BASE_DIR, ....)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -26,7 +26,7 @@ SECRET_KEY = '&e#h+_mkg=oc4xsevtua_8zcqj+sw6%s-3)@)2dcu0f%8*$xzo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['emmalabs.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['emmalabsinternal.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'proyecto',
     'usuario',
     'plantilla',
+    'resultado',
+    'mezcla',
+    'maquina',
     'bootstrap3'
 ]
 
