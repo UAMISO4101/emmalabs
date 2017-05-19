@@ -2,6 +2,10 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    #url para buscar un protocolo
     url(r'^buscarProtocolo/$', views.buscar_protocolo_vista, name='buscarProtocolo'),
+    #url para ver detalle de un protocolo
     url(r'^protocolos/(?P<id_protocolo>\d+)/$', views.detalle_protocolo_vista, name='protocolos'),
+    #url para crear una solicitud
+    url(r'^crearProtocolo/$', views.crear_protocolo, name='crearProtocolo'),
 ]

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
-from .forms import ProtocoloForm
+from .forms import ProtocoloForm, CrearProtocoloForm
 from .models import Protocolo, Paso
 
 
@@ -62,3 +64,25 @@ def detalle_protocolo_vista(request, id_protocolo):
         'lista_insumos': lista_insumos
     }
     return render(request, 'protocolos.html', context)
+
+
+# Vista para crear un Protocolo
+def crear_protocolo(request):
+    if request.method == 'POST':
+        form = ProtocoloForm(request.POST)
+        # Validar formulario
+        if form.is_valid():
+            protocolo=form.save()
+            # Guardar la protocolo
+            protocolo.save()
+            # Cargar mensaje de exito
+            #messages.add_message(request, messages.SUCCESS, 'La solicitud se ha creado correctamente')
+            # Retornar a la pagina crearSolicitud
+            return HttpResponseRedirect(reverse('crearProtocolo'))
+        else:
+            # Visualizar errores presentados
+            print(form.errors)
+    else:
+        form = CrearProtocoloForm()
+
+    return render(request, 'crearProtocolo.html', {'form':form})

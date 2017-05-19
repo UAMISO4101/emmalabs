@@ -2,6 +2,9 @@
 import datetime
 from django import forms
 from functools import partial
+
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from insumo.models import Insumo
 from .models import Protocolo, ClasificacionProtocolo
 
 
@@ -27,4 +30,31 @@ class ProtocoloForm(forms.ModelForm):
         fields = ('nombre',)
         labels = {
             'nombre': 'Nombre:',
+        }
+
+
+class CrearProtocoloForm(forms.ModelForm):
+
+    class Meta:
+        model = Protocolo
+
+        fields = [
+            'nombre',
+            'descripcion',
+            'insumos',
+            'codigo',
+            'clasificacion',
+            'observaciones',
+        ]
+        labels = {
+            'nombre' : 'Nombre',
+            'codigo': 'Codigo',
+            'clasificacion': 'Clasificacion',
+            'descripcion': 'Lista de pasos',
+            'insumos': 'Insumos',
+            'observaciones': 'Observaciones',
+        }
+        widgets = {
+            'descripcion': forms.Textarea,
+            'observaciones': forms.Textarea,
         }

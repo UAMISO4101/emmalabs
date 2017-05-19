@@ -29,7 +29,7 @@ def crear_solicitud(request):
     else:
         form = SolicitudForm()
 
-    return render(request, 'crearSolicitud.html', {'form':form})
+    return render(request, 'crearProtocolo.html', {'form':form})
 
 
 def menu_solicitud(request):
