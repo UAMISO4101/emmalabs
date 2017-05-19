@@ -1,56 +1,66 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
 {% load bootstrap3 %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    {# Load CSS and JavaScript #}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <meta charset="UTF-8">
-    <title>Detalle protocolo</title>
-</head>
-<body>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Detalle del Protocolo</h1>
+                        <hr class="small">
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Solicitud-->
     <div class="row">
         <div class="col-md-6 col-sm-offset-3">
             <div class="page-header">
                 <h2>Protocolo: {{ protocolo.nombre }} </h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-offset-3">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="well">Código: </br> {{ protocolo.codigo }}</div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well">Clasificación: </br> {{ protocolo.clasificacion.nombre_clasificacion }}</div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well">Fecha de creación: </br> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</div>
-                    </div>
-                </div>
 
-                <div class="col-sm-6">
-                    <h3>Lista de pasos:</h3>
-                    <div class="list-group">
-                        {% for paso in lista_pasos %}
-                            <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
-                        {% endfor %}
-                    </div>
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="well">Código: </br> {{ protocolo.codigo }}</div>
                 </div>
-
-                <div class="col-sm-6">
-                    <h3>Lista de insumos:</h3>
-                    <div class="list-group">
-                        {% for insumo in lista_insumos %}
-                            <a href="#" class="list-group-item">{{ insumo.nombre }}</a>
-                        {% endfor %}
-                    </div>
+                <div class="col-sm-4">
+                    <div class="well">Clasificación: </br> {{ protocolo.clasificacion.nombre_clasificacion }}</div>
                 </div>
-
+                <div class="col-sm-4">
+                    <div class="well">Fecha de creación: </br> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</div>
+                </div>
             </div>
+
+            <div class="col-sm-6">
+                <h3>Lista de pasos:</h3>
+                <div class="list-group">
+                    {% for paso in lista_pasos %}
+                        <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Lista de insumos:</h3>
+                <div class="list-group">
+                    {% for insumo in lista_insumos %}
+                        <a href="/insumos/{{ insumo.id }}" class="list-group-item">{{ insumo.nombre }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-6 col-sm-offset-3">
@@ -58,11 +68,11 @@
             <div class="panel panel-default">
                 <div class="panel-body">{{ protocolo.observaciones }}</div>
             </div>
-            <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Volver</a>
+            <div style="text-align:center;">
+                <a href="{% url 'buscarProtocolo' %}" class="btn btn-default">Volver</a>
+            </div>
         </div>
-
-
     </div>
+
 {% endblock %}
-</body>
 </html>
