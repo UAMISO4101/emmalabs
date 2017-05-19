@@ -1,7 +1,8 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
 {% load bootstrap3 %}
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
 
     <!-- inicializar el selector de fechas de JQuery -->
@@ -22,46 +23,62 @@
     <meta charset="UTF-8">
     <title>Buscar protocolos</title>
 </head>
-<div class="row">
-    <div class="col-md-6 col-sm-offset-3">
-        <div class="page-header">
-            <h2>Buscar Protocolos</h2>
-        </div>
-    </div>
-    {% block content %}
-        <div class="row">
-            <div class="col-md-6 col-sm-offset-3">
-                <form method="post" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% bootstrap_form formProtocolo %}
-                    {% buttons %}
-                        <input type="submit" value="Buscar" class="btn btn-primary"/>
-                        <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Cancelar</a>
-                    {% endbuttons %}
-                </form>
 
-                {% if mostrar_resultados %}
-                    <div class="page-header">
-                        <h2>Resultados:</h2>
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Buscar Protocolo</h1>
+                        <hr class="small">
+                        <span class="subheading"></span>
                     </div>
-
-                    {% for protocolo in lista_protocolos %}
-                        <div style="float: left; padding:20px; width:550px; height:170px;">
-                            <div style="float: left; padding:20px; width:520px; height:150px; border-style: solid; border-width: 1px; background-color: aliceblue">
-                                <h5><b>Código:</b> {{ protocolo.codigo }}</h5>
-                                <h5><b>Nombre:</b> {{ protocolo.nombre }}</h5>
-                                <h5><b>Clasificación:</b> {{ protocolo.clasificacion.nombre_clasificacion }}</h5>
-                                <h5><b>Fecha de creación:</b> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</h5>
-                                <a class="btn btn-primary" href="{% url 'protocolos' protocolo.id %}">Ver detalle</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
+                </div>
             </div>
         </div>
-    {% endblock %}
+    </header>
 
-</div>
-</body>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="page-header">
+                <h2>Buscar Protocolos</h2>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-offset-3">
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form formProtocolo %}
+                {% buttons %}
+                    <input type="submit" value="Buscar" class="btn btn-primary"/>
+                    <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Cancelar</a>
+                {% endbuttons %}
+            </form>
+
+            {% if mostrar_resultados %}
+                <div class="page-header">
+                    <h2>Resultados:</h2>
+                </div>
+
+                {% for protocolo in lista_protocolos %}
+                    <div style="float: left; padding:20px; width:550px; height:170px;">
+                        <div style="float: left; padding:20px; width:520px; height:150px; border-style: solid; border-width: 1px; background-color: aliceblue">
+                            <h5><b>Código:</b> {{ protocolo.codigo }}</h5>
+                            <h5><b>Nombre:</b> {{ protocolo.nombre }}</h5>
+                            <h5><b>Clasificación:</b> {{ protocolo.clasificacion.nombre_clasificacion }}</h5>
+                            <h5><b>Fecha de creación:</b> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</h5>
+                            <a class="btn btn-primary" href="{% url 'protocolos' protocolo.id %}">Ver detalle</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
 </html>
