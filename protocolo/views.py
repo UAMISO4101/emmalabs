@@ -4,7 +4,7 @@ import datetime
 from django.shortcuts import render
 
 from .forms import ProtocoloForm
-from .models import Protocolo, Paso
+from .models import Protocolo, Paso, ComentarioProtocolo, Usuario
 
 
 def buscar_protocolo_vista(request):
@@ -49,16 +49,28 @@ def buscar_protocolo_vista(request):
 
 
 def detalle_protocolo_vista(request, id_protocolo):
+    if(request.method == "POST"):
+        usuario_actual = request.user
+        usuario = Usuario.objects.get(user_id=usuario_actual.id)
+
+        comentario_nuevo = ComentarioProtocolo()
+        comentario_nuevo.texto = request.POST['comentario_nuevo']
+        comentario_nuevo.protocolo = Protocolo.objects.get(id=request.POST['id_protocolo'])
+        comentario_nuevo.usuario = usuario
+        comentario_nuevo.save()
+
     # Obtiene el objeto de referencia
     protocolo = Protocolo.objects.get(id=id_protocolo)
     # Traer los objetos relacionados
     lista_pasos = Paso.objects.filter(protocolo=id_protocolo)
     lista_insumos = protocolo.insumos.all()
+    comentarios_protocolo = ComentarioProtocolo.objects.filter(protocolo=id_protocolo).order_by('id')
 
     # Subir la informacion al contexto
     context = {
         'protocolo': protocolo,
         'lista_pasos': lista_pasos,
-        'lista_insumos': lista_insumos
+        'lista_insumos': lista_insumos,
+        'comentarios_protocolo': comentarios_protocolo
     }
     return render(request, 'protocolos.html', context)
