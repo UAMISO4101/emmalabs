@@ -52,7 +52,6 @@ def detalle_protocolo_vista(request, id_protocolo):
     if(request.method == "POST"):
         usuario_actual = request.user
         usuario = Usuario.objects.get(user_id=usuario_actual.id)
-
         comentario_nuevo = ComentarioProtocolo()
         comentario_nuevo.texto = request.POST['comentario_nuevo']
         comentario_nuevo.protocolo = Protocolo.objects.get(id=request.POST['id_protocolo'])
