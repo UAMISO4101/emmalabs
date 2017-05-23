@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import datetime
 from django import forms
+from django.forms import DateField
 from functools import partial
 
-from django.contrib.admin.widgets import FilteredSelectMultiple
 from insumo.models import Insumo
 from .models import Protocolo, ClasificacionProtocolo
+from django.contrib.admin.widgets import AdminDateWidget
 
 
 class MyModelChoiceField(forms.ModelChoiceField):
@@ -18,6 +19,7 @@ class ProtocoloForm(forms.ModelForm):
     DateInput = partial(forms.DateInput, {'class': 'datepicker'})
     # Campos de búsqueda
     fecha_creacion = forms.DateField(widget=DateInput(), required=False, label='Fecha de creacion')
+    #fecha_creacion = DateField(widget = AdminDateWidget, required=False, label='Fecha de creacion')
     clasificacion = MyModelChoiceField(queryset=ClasificacionProtocolo.objects.all(),
                                        empty_label='Seleccione una clasificacion...',
                                        to_field_name='nombre_clasificacion',

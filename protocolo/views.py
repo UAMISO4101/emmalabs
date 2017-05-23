@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -23,19 +24,23 @@ def buscar_protocolo_vista(request):
             mostrar_resultados = True
             # Aplicar criterios de busqueda
 
-            # Si el usuario digita el codigo unico del protocolo se busca directo
+            lista_protocolos = Protocolo.objects.all()
+            # Se aplican los filtros que el usuario digita
             if len(request.POST.get('codigo')) > 0:
-                lista_protocolos = Protocolo.objects.filter(codigo__contains=request.POST.get('codigo'))
-            elif request.POST.get('fecha_creacion') != '':
+                lista_protocolos = lista_protocolos.filter(codigo__contains=request.POST.get('codigo'))
+            if request.POST.get('fecha_creacion') != '':
                 # Se requiere que la fecha coincida con el formato de la base de datos
                 fecha_sin_formato = request.POST.get('fecha_creacion')
                 fecha_con_formato = datetime.datetime.strptime(fecha_sin_formato, '%m/%d/%Y').strftime('%Y-%m-%d')
-                lista_protocolos = Protocolo.objects.filter(fecha_creacion=fecha_con_formato)
-            elif request.POST.get('clasificacion') is not None:
-                lista_protocolos = Protocolo.objects.filter(
+                lista_protocolos = lista_protocolos.filter(fecha_creacion=fecha_con_formato)
+            if request.POST.get('clasificacion') != '':
+                lista_protocolos = lista_protocolos.filter(
                     clasificacion__nombre_clasificacion__contains=request.POST.get('clasificacion'))
-            else:
-                lista_protocolos = Protocolo.objects.filter(nombre__contains=request.POST.get('nombre'))
+            if request.POST.get('nombre') != '':
+                lista_protocolos = lista_protocolos.filter(nombre__contains=request.POST.get('nombre'))
+
+
+
 
     else:  # Si el request es de tipo get
         # Inicializa formulario vacio
@@ -69,14 +74,14 @@ def detalle_protocolo_vista(request, id_protocolo):
 # Vista para crear un Protocolo
 def crear_protocolo(request):
     if request.method == 'POST':
-        form = ProtocoloForm(request.POST)
+        form = CrearProtocoloForm(request.POST)
         # Validar formulario
         if form.is_valid():
             protocolo=form.save()
             # Guardar la protocolo
             protocolo.save()
             # Cargar mensaje de exito
-            #messages.add_message(request, messages.SUCCESS, 'La solicitud se ha creado correctamente')
+            messages.add_message(request, messages.SUCCESS, 'El protocolo se ha creado correctamente')
             # Retornar a la pagina crearSolicitud
             return HttpResponseRedirect(reverse('crearProtocolo'))
         else:
