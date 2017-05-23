@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse
 
+import usuario.views as UsuarioView
+from orden.forms import OrdenForm
 from usuario.models import Usuario
 from .forms import SolicitudForm
 from .models import Solicitud
-from orden.forms import OrdenForm
+
 
 # Vista para crear una solicitud
 def crear_solicitud(request):
@@ -29,15 +31,24 @@ def crear_solicitud(request):
     else:
         form = SolicitudForm()
 
-    return render(request, 'crearSolicitud.html', {'form':form})
+    return render(request, 'crearSolicitud.html', {'form': form})
 
 
 def menu_solicitud(request):
-    return render (request, 'menuSolicitud.html')
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+    context = {
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
+    }
+    return render(request, 'menuSolicitud.html', context)
+
 
 # Vista para listar las solicitudes del usuario
 def listar_solicitudes(request):
-    usuario = Usuario.objects.get(user = request.user)
+    usuario = Usuario.objects.get(user=request.user)
     if usuario.rol_usuario.rol == "rol_asistente":
         # Se filtran las solicitudes por usuario creador
         lista_solicitudes = Solicitud.objects.filter(usuario_creador=usuario).order_by('-fecha_creacion')
@@ -47,6 +58,7 @@ def listar_solicitudes(request):
 
     context = {'lista_solicitudes': lista_solicitudes}
     return render(request, 'solicitudes.html', context)
+
 
 def ver_Solicitud(request, id):
     if (request.method == "POST" and 'btn_aprobarSol' in request.POST):
@@ -58,7 +70,7 @@ def ver_Solicitud(request, id):
             orden.solicitud = Solicitud.objects.get(id=id)
             # Guardar la orden de compra
             orden.save()
-            #Actualizar el estado de la solicitud a aprobado
+            # Actualizar el estado de la solicitud a aprobado
             solicitud = Solicitud.objects.get(id=id)
             solicitud.estado = "Aprobado"
             solicitud.respuesta = request.POST['respuestaAprobado']
