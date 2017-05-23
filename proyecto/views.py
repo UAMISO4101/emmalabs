@@ -1,7 +1,10 @@
 # coding=utf-8
+import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
+from proyecto import models
 from proyecto.forms import ProyectoForm
 from usuario.models import Usuario
 from .models import Proyecto
@@ -32,7 +35,7 @@ def crear_proyecto(request):
         if form.is_valid():
             proyecto = form.save(commit=False)
             # Se debe guardar el usuario creador
-            proyecto.usuario_creador = Usuario.objects.get(user=request.user)
+            proyecto.cientifico_asignado = Usuario.objects.get(user=request.user)
             # Guardar la solicitud
             proyecto.save()
             # Cargar mensaje de exito
