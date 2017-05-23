@@ -15,8 +15,6 @@ def crear_experimento(request):
         # Validar formulario
         if form.is_valid():
             proyecto = form.save(commit=False)
-            # Se debe guardar el usuario creador
-            proyecto.cientifico_asignado = Usuario.objects.get(user=request.user)
             # Guardar la solicitud
             proyecto.save()
             # Cargar mensaje de exito
