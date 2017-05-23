@@ -12,6 +12,11 @@ from .models import Solicitud
 
 # Vista para crear una solicitud
 def crear_solicitud(request):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     if request.method == 'POST':
         form = SolicitudForm(request.POST)
         # Validar formulario
@@ -31,7 +36,13 @@ def crear_solicitud(request):
     else:
         form = SolicitudForm()
 
-    return render(request, 'crearSolicitud.html', {'form': form})
+    context = {
+        'form': form,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
+    }
+
+    return render(request, 'crearSolicitud.html', context)
 
 
 def menu_solicitud(request):
@@ -48,7 +59,12 @@ def menu_solicitud(request):
 
 # Vista para listar las solicitudes del usuario
 def listar_solicitudes(request):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
     usuario = Usuario.objects.get(user=request.user)
+
     if usuario.rol_usuario.rol == "rol_asistente":
         # Se filtran las solicitudes por usuario creador
         lista_solicitudes = Solicitud.objects.filter(usuario_creador=usuario).order_by('-fecha_creacion')
@@ -56,11 +72,20 @@ def listar_solicitudes(request):
         # Se filtran las solicitudes por usuario destino
         lista_solicitudes = Solicitud.objects.filter(usuario_destino=usuario).order_by('-fecha_creacion')
 
-    context = {'lista_solicitudes': lista_solicitudes}
+    context = {
+        'lista_solicitudes': lista_solicitudes,
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
+    }
     return render(request, 'solicitudes.html', context)
 
 
 def ver_Solicitud(request, id):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     if (request.method == "POST" and 'btn_aprobarSol' in request.POST):
         form = OrdenForm(request.POST)
         # Validar formulario
@@ -98,10 +123,14 @@ def ver_Solicitud(request, id):
             context = {
                 'solicitud': solicitud,
                 'form': form,
+                'lista_menu': lista_menu,
+                'usuario_parametro': usuario_parametro,
             }
         else:
             context = {
                 'solicitud': solicitud,
+                'lista_menu': lista_menu,
+                'usuario_parametro': usuario_parametro,
             }
 
     return render(request, 'verSolicitud.html', context)
