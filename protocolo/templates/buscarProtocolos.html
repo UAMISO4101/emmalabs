@@ -1,67 +1,264 @@
 {% load bootstrap3 %}
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>EmmaLabs - Laboratorio Químico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" href="../static/assets/images/favicon.ico">
 
-    <!-- inicializar el selector de fechas de JQuery -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#id_fecha_creacion").datepicker();
-        });
-    </script>
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="../static/assets/plugins/morris/morris.css">
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="../static/assets/css/style.css" rel="stylesheet" type="text/css">
 
-
-    {# Load CSS and JavaScript #}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-
-    <meta charset="UTF-8">
-    <title>Buscar protocolos</title>
 </head>
-<div class="row">
-    <div class="col-md-6 col-sm-offset-3">
-        <div class="page-header">
-            <h2>Buscar Protocolos</h2>
+
+<!-- Amplia la pantalla o la reduce automaticamente-->
+{% if user.is_authenticated %}
+    <body class="fixed-left">
+    <!-- Begin page -->
+    <div id="wrapper">
+{% else %}
+    <body class="widescreen fixed-left-void">
+    <!-- Begin page -->
+    <div id="wrapper" class="enlarged forced">
+{% endif %}
+
+{% include "login.html" %}
+
+
+<!-- Top Bar Start -->
+<div class="topbar">
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <div class="text-center">
+            <!--<a href="index.html" class="logo"><span>Up</span>Bond</a>-->
+            <!--<a href="index.html" class="logo-sm"><span>U</span></a>-->
+            <a href="../" class="logo"><img src="../static/assets/images/logo.png" height="20"
+                                            alt="logo"></a>
+            <a href="../" class="logo-sm"><img src="../static/assets/images/logo_sm.png" height="30"
+                                               alt="logo"></a>
         </div>
     </div>
-    {% block content %}
-        <div class="row">
-            <div class="col-md-6 col-sm-offset-3">
-                <form method="post" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% bootstrap_form formProtocolo %}
-                    {% buttons %}
-                        <input type="submit" value="Buscar" class="btn btn-primary"/>
-                        <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Cancelar</a>
-                    {% endbuttons %}
-                </form>
 
-                {% if mostrar_resultados %}
-                    <div class="page-header">
-                        <h2>Resultados:</h2>
+    <!-- Button mobile view to collapse sidebar menu -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+
+            {% if user.is_authenticated %}
+
+                <div class="">
+                    <div class="pull-left">
+                        <button type="button" class="button-menu-mobile open-left waves-effect waves-light">
+                            <i class="ion-navicon"></i>
+                        </button>
+                        <span class="clearfix"></span>
                     </div>
 
-                    {% for protocolo in lista_protocolos %}
-                        <div style="float: left; padding:20px; width:550px; height:170px;">
-                            <div style="float: left; padding:20px; width:520px; height:150px; border-style: solid; border-width: 1px; background-color: aliceblue">
-                                <h5><b>Código:</b> {{ protocolo.codigo }}</h5>
-                                <h5><b>Nombre:</b> {{ protocolo.nombre }}</h5>
-                                <h5><b>Clasificación:</b> {{ protocolo.clasificacion.nombre_clasificacion }}</h5>
-                                <h5><b>Fecha de creación:</b> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</h5>
-                                <a class="btn btn-primary" href="{% url 'protocolos' protocolo.id %}">Ver detalle</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+                    <ul class="nav navbar-nav navbar-right pull-right">
 
+                        <!-- Boton pantalla completa -->
+                        <li class="hidden-xs">
+                            <a href="#" id="btn-fullscreen"
+                               class="waves-effect waves-light notification-icon-box"><i class="ion-qr-scanner"></i></a>
+                        </li>
+
+                        <!-- Botón de sesión-->
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile waves-effect waves-light"
+                               data-toggle="dropdown" aria-expanded="true">
+                                <img src="../static/assets/images/users/avatar-1.jpg" alt="user-img"
+                                     class="img-circle">
+                                <span class="profile-username">{{ user.username }}<span class="caret"></span>
+                                        </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)"> Perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="../logout"> Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+
+            {% else %}
+
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle waves-effect waves-light notification-icon-box"
+                           data-toggle="modal"
+                           data-target="#myModal"><i class="mdi mdi-account-key"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- Top Bar End -->
+
+
+<!-- ========== Left Sidebar Start ========== -->
+{% if user.is_authenticated %}
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft">
+
+            <div class="user-details">
+                <div class="text-center">
+                    <img src="../static/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
+                </div>
+                <div class="user-info">
+                    <div class="dropdown">
+                        <h4>
+                            {{ user.first_name }} {{ user.last_name }}
+                            <small><i>{{ usuario_parametro.rol_usuario.descripcion }}</i></small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!--- Divider -->
+
+            <!-- Genera el menu de usuario -->
+            <div id="sidebar-menu">
+                <ul>
+                    {% for obj in lista_menu %}
+                        <li class="has_sub">
+                            <a href="#" class="waves-effect">
+                                <span class="mdi mdi-chevron-down"></span>
+                                <span> {{ obj.menu }} </span>
+                            </a>
+
+                            <ul class="list-unstyled">
+                                {% for op in obj.opciones %}
+                                    <li>
+                                        <a href="{{ op.template }}">
+                                            <span class="mdi mdi-chevron-right "></span>{{ op.opcion }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div> <!-- end sidebarinner -->
+    </div>
+{% endif %}
+<!-- Left Sidebar End -->
+
+<!-- Start right Content here -->
+
+<div class="content-page">
+
+
+    {% block content %}
+        <!-- Aquí va el contenido de la página -->
+        <!-- Start content -->
+        <div class="content">
+
+            <div class="">
+                <div class="page-header-title">
+                    <h4 class="page-title">Buscar protocolos</h4>
+                </div>
+            </div>
+
+            <div class="page-content-wrapper">
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-offset-3">
+
+                            <form method="post" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% bootstrap_form formProtocolo %}
+                                {% buttons %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Buscar
+                                    </button>
+                                    <a href="{% url 'index' %}" class="btn btn-default waves-effect">Cancelar</a>
+                                {% endbuttons %}
+                            </form>
+
+                            {% if mostrar_resultados %}
+                                <div class="page-header">
+                                    <h2>Resultados:</h2>
+                                </div>
+
+                                {% for protocolo in lista_protocolos %}
+                                    <div class="">
+                                        <div class="panel panel-color panel-dark">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Protocolo {{ protocolo.codigo }} </h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <h5><b>Nombre:</b> {{ protocolo.nombre }}</h5>
+                                                <h5><b>Código:</b> {{ protocolo.codigo }}</h5>
+                                                <h5>
+                                                    <b>Clasificación:</b> {{ protocolo.clasificacion.nombre_clasificacion }}
+                                                </h5>
+                                                <h5><b>Fecha de creación:</b>
+                                                    {{ protocolo.fecha_creacion|date:"d/M/Y" }}
+                                                </h5>
+                                                <a class="btn btn-primary" href="{% url 'protocolos' protocolo.id %}">
+                                                    Ver detalle
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
     {% endblock %}
 
+
+    <footer class="footer">
+        © 2017 EmmaLabs - Universidad de los Andes.
+    </footer>
+
 </div>
+<!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- jQuery  -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/bootstrap.min.js"></script>
+<script src="../static/assets/js/modernizr.min.js"></script>
+<script src="../static/assets/js/detect.js"></script>
+<script src="../static/assets/js/fastclick.js"></script>
+<script src="../static/assets/js/jquery.slimscroll.js"></script>
+<script src="../static/assets/js/jquery.blockUI.js"></script>
+<script src="../static/assets/js/waves.js"></script>
+<script src="../static/assets/js/wow.min.js"></script>
+<script src="../static/assets/js/jquery.nicescroll.js"></script>
+<script src="../static/assets/js/jquery.scrollTo.min.js"></script>
+<!--Morris Chart-->
+<script src="../static/assets/plugins/morris/morris.min.js"></script>
+<script src="../static/assets/plugins/raphael/raphael-min.js"></script>
+<script src="../static/assets/pages/dashborad.js"></script>
+<script src="../static/assets/js/app.js"></script>
+
+
 </body>
 </html>
