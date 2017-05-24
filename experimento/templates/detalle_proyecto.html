@@ -229,7 +229,7 @@
                                     <tr>
                                         <td>{{ experimento.nombre }}</td>
                                         <td>{{ experimento.estado }}</td>
-                                        <td>{{ experimento.resultado }}</td>
+                                        <td>{% if experimento.resultado != none %}{{ experimento.resultado }}{% endif %}</td>
                                         <td>{{ experimento.fecha_resultado }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary waves-effect waves-light"
