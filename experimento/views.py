@@ -1,11 +1,39 @@
 # coding=utf-8
 from django.shortcuts import render
-
 import usuario.views as UsuarioView
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from experimento.forms import ExperimentoForm
 from experimento.models import Experimento
 from proyecto.models import Proyecto
 from usuario.models import Usuario
+from django.urls import reverse
 
+def crear_experimento(request, id):
+    if request.method == 'POST':
+        form = ExperimentoForm(request.POST)
+        # Validar formulario
+        if form.is_valid():
+            experimento = form.save()
+            # Guardar la solicitud
+            experimento.save()
+
+            proyecto = Proyecto.objects.get(id=id)
+            proyecto.experimentos.add(experimento)
+            proyecto.save()
+
+            # Cargar mensaje de exito
+            messages.add_message(request, messages.SUCCESS, 'El experimento se ha creado correctamente')
+            # Retornar a la pagina crearSolicitud
+
+            return HttpResponseRedirect(reverse('proyectos', args=(id)))
+        else:
+            # Visualizar errores presentados
+            print(form.errors)
+    else:
+        form = ExperimentoForm()
+
+    return render(request, 'crearExperimento.html', {'form':form})
 
 def detalleProyecto(request, id):
     # Inicializar variables

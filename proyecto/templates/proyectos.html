@@ -94,6 +94,30 @@
                         <a href="#" class="dropdown-toggle waves-effect waves-light notification-icon-box"
                            data-toggle="modal"
                            data-target="#myModal"><i class="mdi mdi-account-key"></i> Iniciar Sesión
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <a href="/crearProyecto" style="float: right;" class="btn btn-primary">Nuevo proyecto</a>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    {% for proyecto in lista_proyectos %}
+                        <a class="col-md-12" href="/proyectos/{{ proyecto.id }}/">
+                            <div  class="col-md-10">
+                                <h2 class="post-title">
+                                    {{ proyecto.nombre }}
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    {{ proyecto.descripcion }}
+                                </h3>
+                            </div>
+                            <div class="col-md-2">
+                                  <img src="https://www.iag.biz/wp-content/uploads/2016/11/Flat-Icon-Set-6.png" height="100px" width="100px">
+                            </div>
+                            <p class="col-md-12 text-center post-meta">{{ proyecto.estado }} | {{ proyecto.fecha_creacion }}</p>
                         </a>
                     </li>
                 </ul>

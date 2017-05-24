@@ -206,6 +206,26 @@
                         </div>
                     </div>
 
+
+                    <h2 class="text-center">{{ proyecto.nombre }}</h2>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Científico a cargo</td>
+                            <td>{{ proyecto.cientifico_asignado.nombres }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de creación</td>
+                            <td>{{ proyecto.fecha_creacion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Estado del proyecto</td>
+                            <td>{{ proyecto.estado }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <a href="/proyectos/{{ proyecto.id }}/crearExperimento" style="float: right;" class="btn btn-primary">Nuevo experimento</a>
                     <br/><br/>
 
                     {% include "dialogo_resultado.html" %}
