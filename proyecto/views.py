@@ -29,7 +29,11 @@ def proyectos(request):
     else:
         lista_proyectos = Proyecto.objects.all()
 
-    context = {'lista_proyectos': lista_proyectos}
+    context = {
+        'lista_proyectos': lista_proyectos,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
+    }
 
     return render(request, 'proyectos.html', context)
 

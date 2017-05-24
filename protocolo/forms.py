@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 import datetime
 from django import forms
+from django.forms import DateField
 from functools import partial
+
+from insumo.models import Insumo
 from .models import Protocolo, ClasificacionProtocolo
+from django.contrib.admin.widgets import AdminDateWidget
 
 
 class MyModelChoiceField(forms.ModelChoiceField):
@@ -11,7 +15,10 @@ class MyModelChoiceField(forms.ModelChoiceField):
 
 
 class ProtocoloForm(forms.ModelForm):
-    # Elemento para inicializar el selector de fechas
+    #BIRTH_MONTH_CHOICES = ('1980', '1981', '1982')
+    #fecha_creacion = forms.DateField(widget=forms.SelectDateWidget(BIRTH_MONTH_CHOICES))
+
+    #Elemento para inicializar el selector de fechas
     DateInput = partial(forms.DateInput, {'class': 'datepicker'})
     # Campos de búsqueda
     fecha_creacion = forms.DateField(widget=DateInput(), required=False, label='Fecha de creacion')
@@ -27,4 +34,31 @@ class ProtocoloForm(forms.ModelForm):
         fields = ('nombre',)
         labels = {
             'nombre': 'Nombre:',
+        }
+
+
+class CrearProtocoloForm(forms.ModelForm):
+
+    class Meta:
+        model = Protocolo
+
+        fields = [
+            'nombre',
+            'descripcion',
+            'insumos',
+            'codigo',
+            'clasificacion',
+            'observaciones',
+        ]
+        labels = {
+            'nombre' : 'Nombre',
+            'codigo': 'Codigo',
+            'clasificacion': 'Clasificacion',
+            'descripcion': 'Lista de pasos',
+            'insumos': 'Insumos',
+            'observaciones': 'Observaciones',
+        }
+        widgets = {
+            'descripcion': forms.Textarea,
+            'observaciones': forms.Textarea,
         }

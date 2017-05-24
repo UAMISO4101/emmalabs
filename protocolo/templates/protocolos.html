@@ -1,4 +1,11 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
 {% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
 
 
 <!DOCTYPE html>
@@ -160,7 +167,6 @@
 <!-- Start right Content here -->
 
 <div class="content-page">
-
 
     {% block content %}
         <!-- Aquí va el contenido de la página -->

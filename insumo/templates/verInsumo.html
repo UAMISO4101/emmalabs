@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+    {# Load the tag library #}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Detalle del Insumo</h1>
+                        <hr class="small">
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Main Content Solicitud-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <header class="page-header">
+                    <h2 class="text-center">{{ insumo.nombre }}</h2>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Descripción</td>
+                            <td>{{ solicitud.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Cantidad en bodega</td>
+                            <td>{{ solicitud.cantidad }}</td>
+                        </tr>
+                        <tr>
+                            <td>Unidad de medida</td>
+                            <td>{{ solicitud.unidades }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </header>
+
+            {% buttons %}
+                <div style="text-align:center;">
+                    <input type="button" value="Volver" class="btn btn-default" onClick="history.back()">
+                </div>
+            {% endbuttons %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

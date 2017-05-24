@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-
 from django.db import models
 
 from insumo.models import Insumo
@@ -8,6 +7,9 @@ from insumo.models import Insumo
 
 class ClasificacionProtocolo(models.Model):
     nombre_clasificacion = models.CharField(max_length=50, default="Sin clasificacion")
+
+    def __str__(self):
+        return '{}'.format(self.nombre_clasificacion)
 
 
 class Protocolo(models.Model):
