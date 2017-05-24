@@ -21,11 +21,10 @@ def proyectos(request):
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
 
-    if request.user.is_authenticated:
-        # Cargar los proyectos del usuario ha iniciado sesión
     # if usuario_actual.is_authenticated:
     # Cargar los proyectos del usuario ha iniciado sesión
     if usuario_actual.rol_usuario == "rol_asistente":
+
         lista_proyectos = Proyecto.objects.filter(asistentes__user__usuario=usuario_parametro.id)
     else:
         lista_proyectos = Proyecto.objects.all()
