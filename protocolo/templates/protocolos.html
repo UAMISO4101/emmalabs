@@ -1,12 +1,8 @@
-{% extends 'base.html' %}
-
-    {# Load the tag library #}
+{# Load the tag library #}
 {% load bootstrap3 %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% block content %}
-
 
 <!DOCTYPE html>
 <html>
@@ -48,7 +44,7 @@
             <a href="{% url 'index' %}" class="logo"><img src="../../static/assets/images/logo.png" height="20"
                                                           alt="logo"></a>
             <a href="{% url 'index' %}" class="logo-sm"><img src="../../static/assets/images/logo_sm.png" height="30"
-                                               alt="logo"></a>
+                                                             alt="logo"></a>
         </div>
     </div>
 
@@ -168,99 +164,93 @@
 
 <div class="content-page">
 
-        <!-- Aquí va el contenido de la página -->
+    <!-- Aquí va el contenido de la página -->
 
-        <!-- Start content -->
-        <div class="content">
+    <!-- Start content -->
+    <div class="content">
 
-            <div class="">
-                <div class="page-header-title">
-                    <h4 class="page-title">Protocolo: {{ protocolo.nombre }} </h4>
-                </div>
-            </div>
-
-            <div class="page-content-wrapper">
-
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-offset-3">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="well">Código: </br> {{ protocolo.codigo }}</div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="well">
-                                        Clasificación: </br> {{ protocolo.clasificacion.nombre_clasificacion }}</div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="well">Fecha de
-                                        creación: </br> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <h3>Lista de pasos:</h3>
-                                <div class="list-group">
-                                    {% for paso in lista_pasos %}
-                                        <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <h3>Lista de insumos:</h3>
-                                <div class="list-group">
-                                    {% for insumo in lista_insumos %}
-                                        <a href="#" class="list-group-item">{{ insumo.nombre }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-offset-3">
-                        <h3>Observaciones:</h3>
-                        <div class="panel panel-default">
-                            <div class="panel-body">{{ protocolo.observaciones }}</div>
-                        </div>
-
-			<br/><br/>
-
-			<table class="table table-hover">
-			<thead>
-			<th>Comentarios</th>
-			</thead>
-			<tbody>
-			{% for co in comentarios_protocolo  %}
-			<tr>
-			<td>{{ co.texto }}</td>
-			</tr>
-			{% endfor %}
-			<tr>
-			<td>
-			<form method="post" id="formulario" class="form text-center">
-			<input type="hidden" name="id_protocolo" value="{{ protocolo.id }}" />
-			<input type="text" name="comentario_nuevo"/>
-			<input type="submit" value="Enviar" class="btn btn-default btn-sm"/>
-			<form>
-			</td>
-			</tr>
-			</tbody>
-			</table>
-
-                        <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Volver</a>
-                    </div>
-                </div>
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">Protocolo: {{ protocolo.nombre }} </h4>
             </div>
         </div>
 
+        <div class="page-content-wrapper">
 
+            <div class="container">
 
+                <div class="row">
+                    <div class="col-md-6 col-sm-offset-3">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="well">Código: </br> {{ protocolo.codigo }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well">
+                                    Clasificación: </br> {{ protocolo.clasificacion.nombre_clasificacion }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well">Fecha de
+                                    creación: </br> {{ protocolo.fecha_creacion|date:"d/M/Y" }}</div>
+                            </div>
+                        </div>
 
-    {% endblock %}
+                        <div class="col-sm-6">
+                            <h3>Lista de pasos:</h3>
+                            <div class="list-group">
+                                {% for paso in lista_pasos %}
+                                    <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
 
+                        <div class="col-sm-6">
+                            <h3>Lista de insumos:</h3>
+                            <div class="list-group">
+                                {% for insumo in lista_insumos %}
+                                    <a href="#" class="list-group-item">{{ insumo.nombre }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-offset-3">
+                    <h3>Observaciones:</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">{{ protocolo.observaciones }}</div>
+                    </div>
+
+                    <br/><br/>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <th>Comentarios</th>
+                        </thead>
+                        <tbody>
+                        {% for co in comentarios_protocolo %}
+                            <tr>
+                                <td>{{ co.texto }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>
+                                <form method="post" id="formulario" class="form text-center">
+                                    <input type="hidden" name="id_protocolo" value="{{ protocolo.id }}"/>
+                                    <input type="text" name="comentario_nuevo"/>
+                                    <input type="submit" value="Enviar" class="btn btn-default btn-sm"/>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <footer class="footer">
