@@ -1,14 +1,22 @@
 # coding=utf-8
-from django.shortcuts import render
 from django.contrib import messages
+from django.shortcuts import render
+
+import usuario.views as UsuarioView
 from experimento.models import Experimento
-from proyecto.models import Proyecto
 from protocolo.models import Protocolo
+from proyecto.models import Proyecto
 from resultado.models import Resultado
+from usuario.models import Usuario
+
 
 def registrarResultado(request, id):
-    if(request.method == "POST"):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
+    if (request.method == "POST"):
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
         obrevaciones = request.POST['obrevaciones']
@@ -32,10 +40,14 @@ def registrarResultado(request, id):
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
     protocolos = Protocolo.objects.all()
+
     context = {
         'experimento': experimento,
-        'proyectos' : proyectos,
-        'protocolos' : protocolos,
-        'resultados' : resultados
+        'proyectos': proyectos,
+        'protocolos': protocolos,
+        'resultados': resultados,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
     }
+
     return render(request, 'registrar_resultado.html', context)

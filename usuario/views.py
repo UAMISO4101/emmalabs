@@ -21,14 +21,15 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, "Bienvenido al sistema: {}".format(username), extra_tags="alert-success")
             #  return HttpResponseRedirect('/')
         else:
             messages.error(request, "¡El usuario o la contraseña son incorrectos!", extra_tags="alert-danger")
             # return HttpResponseRedirect('/')
 
-    context = {'form_login': form_login,
-               'username': username}
+    context = {
+        'form_login': form_login,
+        'username': username,
+    }
 
     return HttpResponseRedirect('/', context)
 
@@ -40,7 +41,7 @@ def crearMenu(user_param):
 
     # Cargar el usuario activo
     usuario_parametro = Usuario.objects.get(user_id=user_param.id)
-    print("ID Usuario=", user_param.id, "Rol_id=", usuario_parametro.rol_usuario.id)
+    # print("ID Usuario=", user_param.id, "Rol_id=", usuario_parametro.rol_usuario.id)
 
     # Consultar encabezados del menu segun el rol del usuario
     consulta_encabezados = MenuPorRol.objects.filter(rol=usuario_parametro.rol_usuario.id)

@@ -1,16 +1,33 @@
 from django.shortcuts import render
 
-# Create your views here.
+import usuario.views as UsuarioView
+from usuario.models import Usuario
 from .models import Orden
 
 
 def ordenes(request):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     lista_ordenes = Orden.objects.all()
 
-    context = {'lista_ordenes': lista_ordenes}
+    context = {
+        'lista_ordenes': lista_ordenes,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
+    }
+
     return render(request, 'ordenes.html', context)
 
+
 def aprobar_orden(request, id):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     orden = Orden.objects.get(id=id)
     orden.estado = 1
     orden.save()
@@ -18,19 +35,26 @@ def aprobar_orden(request, id):
     orden = Orden.objects.get(id=id)
 
     context = {
-        'orden': orden
+        'orden': orden,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
     }
+
     return render(request, 'detalle_orden.html', context)
 
+
 def detalleOrden(request, id):
-    """if(request.method == "POST"):
-        resultado = request.POST['resultado']
-        id = request.POST['orden_id']
-        orden = Orden.objects.get(id=id)
-        orden.resultado = resultado
-        orden.save()"""
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     orden = Orden.objects.get(id=id)
+
     context = {
-        'orden': orden
+        'orden': orden,
+        'usuario_parametro': usuario_parametro,
+        'lista_menu': lista_menu,
     }
+
     return render(request, 'detalle_orden.html', context)

@@ -1,0 +1,31 @@
+<!-- sample modal content -->
+<div id="modalResultado" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Realizar experimento</h4>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" id="formulario" class="form text-center">
+                    <input type="hidden" name="experimento_id" id="experimento"/>
+                    <div class="form-group-sm">
+                        <select class="col-md-12 form-control" name="resultado">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Exitoso">Exitoso</option>
+                            <option value="Fallido">Fallido</option>
+                        </select>
+                    </div>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="formulario">Guardar</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
