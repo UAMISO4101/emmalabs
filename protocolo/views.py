@@ -35,11 +35,6 @@ def buscar_protocolo_vista(request):
             # Se aplican los filtros que el usuario digita
             if len(request.POST.get('codigo')) > 0:
                 lista_protocolos = lista_protocolos.filter(codigo__contains=request.POST.get('codigo'))
-            if request.POST.get('fecha_creacion') != '':
-                # Se requiere que la fecha coincida con el formato de la base de datos
-                fecha_sin_formato = request.POST.get('fecha_creacion')
-                fecha_con_formato = datetime.datetime.strptime(fecha_sin_formato, '%m/%d/%Y').strftime('%Y-%m-%d')
-                lista_protocolos = lista_protocolos.filter(fecha_creacion=fecha_con_formato)
             if request.POST.get('clasificacion') != '':
                 lista_protocolos = lista_protocolos.filter(
                     clasificacion__nombre_clasificacion__contains=request.POST.get('clasificacion'))

@@ -15,13 +15,7 @@ class MyModelChoiceField(forms.ModelChoiceField):
 
 
 class ProtocoloForm(forms.ModelForm):
-    #BIRTH_MONTH_CHOICES = ('1980', '1981', '1982')
-    #fecha_creacion = forms.DateField(widget=forms.SelectDateWidget(BIRTH_MONTH_CHOICES))
-
-    #Elemento para inicializar el selector de fechas
-    DateInput = partial(forms.DateInput, {'class': 'datepicker'})
     # Campos de búsqueda
-    fecha_creacion = forms.DateField(widget=DateInput(), required=False, label='Fecha de creacion')
     clasificacion = MyModelChoiceField(queryset=ClasificacionProtocolo.objects.all(),
                                        empty_label='Seleccione una clasificacion...',
                                        to_field_name='nombre_clasificacion',
