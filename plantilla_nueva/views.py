@@ -194,93 +194,92 @@ def inicializarDatos():
                 menuCientifico1 = MenuPorRol()
                 menuCientifico1.menu = "Proyectos"
                 menuCientifico1.opcion = "Ver Proyectos"
-                menuCientifico1.template = "../proyectos"
+                menuCientifico1.template = "/proyectos"
                 menuCientifico1.rol = rol1
                 menuCientifico1.save()
 
                 menuCientifico2 = MenuPorRol()
                 menuCientifico2.menu = "Experimentos"
                 menuCientifico2.opcion = "Ver Experimentos"
-                menuCientifico2.template = "../proyectos"
+                menuCientifico2.template = "/proyectos"
                 menuCientifico2.rol = rol1
                 menuCientifico2.save()
 
                 menuCientifico3 = MenuPorRol()
                 menuCientifico3.menu = "Protocolos"
                 menuCientifico3.opcion = "Buscar Protocolo"
-                menuCientifico3.template = "../buscarProtocolo"
+                menuCientifico3.template = "/buscarProtocolo"
                 menuCientifico3.rol = rol1
                 menuCientifico3.save()
 
                 menuCientifico4 = MenuPorRol()
                 menuCientifico4.menu = "Ordenes"
                 menuCientifico4.opcion = "Listar Ordenes"
-                menuCientifico4.template = "../ordenes"
+                menuCientifico4.template = "/ordenes"
                 menuCientifico4.rol = rol1
                 menuCientifico4.save()
 
                 menuCientifico5 = MenuPorRol()
                 menuCientifico5.menu = "Solicitudes"
                 menuCientifico5.opcion = "Gestionar Solicitudes"
-                menuCientifico5.template = "../menuSolicitud"
+                menuCientifico5.template = "/menuSolicitud"
                 menuCientifico5.rol = rol1
                 menuCientifico5.save()
 
                 menuAsistente1 = MenuPorRol()
                 menuAsistente1.menu = "Proyectos"
                 menuAsistente1.opcion = "Ver Proyectos"
-                menuAsistente1.template = "../proyectos"
+                menuAsistente1.template = "/proyectos"
                 menuAsistente1.rol = rol2
                 menuAsistente1.save()
 
                 menuAsistente2 = MenuPorRol()
                 menuAsistente2.menu = "Experimentos"
                 menuAsistente2.opcion = "Ver Experimentos"
-                menuAsistente2.template = "../proyectos"
+                menuAsistente2.template = "/proyectos"
                 menuAsistente2.rol = rol2
                 menuAsistente2.save()
 
                 menuAsistente3 = MenuPorRol()
                 menuAsistente3.menu = "Protocolos"
                 menuAsistente3.opcion = "Buscar Protocolo"
-                menuAsistente3.template = "../buscarProtocolo"
+                menuAsistente3.template = "/buscarProtocolo"
                 menuAsistente3.rol = rol2
                 menuAsistente3.save()
 
                 menuAsistente4 = MenuPorRol()
                 menuAsistente4.menu = "Ordenes"
                 menuAsistente4.opcion = "Listar Ordenes"
-                menuAsistente4.template = "../ordenes"
+                menuAsistente4.template = "/ordenes"
                 menuAsistente4.rol = rol2
                 menuAsistente4.save()
 
                 menuAsistente5 = MenuPorRol()
                 menuAsistente5.menu = "Solicitudes"
                 menuAsistente5.opcion = "Gestionar Solicitudes"
-                menuAsistente5.template = "../menuSolicitud"
+                menuAsistente5.template = "/menuSolicitud"
                 menuAsistente5.rol = rol2
                 menuAsistente5.save()
 
                 menuJefe1 = MenuPorRol()
                 menuJefe1.menu = "Proyectos"
                 menuJefe1.opcion = "Ver Proyectos"
-                menuJefe1.template = "../proyectos"
+                menuJefe1.template = "/proyectos"
                 menuJefe1.rol = rol3
                 menuJefe1.save()
 
                 menuJefe2 = MenuPorRol()
                 menuJefe2.menu = "Experimentos"
                 menuJefe2.opcion = "Ver Experimentos"
-                menuJefe2.template = "../proyectos"
+                menuJefe2.template = "/proyectos"
                 menuJefe2.rol = rol3
                 menuJefe2.save()
 
                 menuJefe3 = MenuPorRol()
                 menuJefe3.menu = "Solicitudes"
                 menuJefe3.opcion = "Gestionar Solicitudes"
-                menuJefe3.template = "../menuSolicitud"
+                menuJefe3.template = "/menuSolicitud"
                 menuJefe3.rol = rol3
                 menuJefe3.save()
-
     except:
         pass
