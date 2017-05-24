@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'emmalabs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-DATABASES = {'default': dj_database_url.config(default='postgres://sgniqwvkisrvpg:fa72456acabe99f7e590f73247a9ade1ad5ed59933fb4d7b50b2ea03654298cb@ec2-54-163-254-48.compute-1.amazonaws.com:5432/d8c821v897d7r8')}
+DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
