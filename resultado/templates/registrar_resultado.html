@@ -212,7 +212,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Fecha de registro</td>
+                                            <td>Fecha del resultado</td>
                                             <td>
 
                                                 <div class="form-group">
@@ -284,6 +284,7 @@
                                             <td>Detalle</td>
                                             <td>Satisfactorio</td>
                                             <td>Observaciones</td>
+                                            <td>Fecha del resultado</td>
                                             <td>Opciones</td>
                                         <tr/>
                                         </thead>
@@ -291,13 +292,10 @@
                                         {% for res in resultados %}
                                             <tr>
                                                 <td>{{ res.detalle_resultado }}</td>
-                                                <td>{% if res.satisfactorio %}Si{% else %}
-                                                    No{% endif %}</td>
+                                                <td>{% if res.satisfactorio %}Si{% else %}No{% endif %}</td>
                                                 <td>{{ res.observaciones }}</td>
-                                                <td class="text-center"><a
-                                                        href="/registrar_mezcla/{{ res.id }}"
-                                                        class="btn btn-primary waves-effect waves-light">Agregar
-                                                    mezcla</a></td>
+                                                <td>{% if res.fecha_resultado != none %}{{ res.fecha_resultado|date:"Y-m-d" }}{% endif %}</td>
+                                                <td><a href="/registrar_mezcla/{{ res.id }}" class="btn btn-primary waves-effect waves-light">Agregar mezcla</a></td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
