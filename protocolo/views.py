@@ -77,6 +77,7 @@ def detalle_protocolo_vista(request, id_protocolo):
     # Cargar el menu del usuario
     lista_menu = UsuarioView.crearMenu(request.user)
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+    comentarios_protocolo = ComentarioProtocolo.objects.filter(protocolo=id_protocolo).order_by('id')
 
     # Subir la informacion al contexto
     context = {
@@ -85,6 +86,7 @@ def detalle_protocolo_vista(request, id_protocolo):
         'lista_insumos': lista_insumos,
         'lista_menu': lista_menu,
         'usuario_parametro': usuario_parametro,
+        'comentarios_protocolo': comentarios_protocolo
     }
     return render(request, 'protocolos.html', context)
 
