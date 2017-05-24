@@ -1,64 +1,245 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EmmaLabs - Laboratorio Químico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" href="../static/assets/images/favicon.ico">
 
-    {# Load the tag library #}
-{% load bootstrap3 %}
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% block content %}
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="../static/assets/plugins/morris/morris.css">
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="../static/assets/css/style.css" rel="stylesheet" type="text/css">
 
-    <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>Solicitudes</h1>
-                        <hr class="small">
-                        <span class="subheading"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+</head>
+
+<!-- Amplia la pantalla o la reduce automaticamente-->
+{% if user.is_authenticated %}
+    <body class="fixed-left">
+    <!-- Begin page -->
+    <div id="wrapper">
+{% else %}
+    <body class="widescreen fixed-left-void">
+    <!-- Begin page -->
+    <div id="wrapper" class="enlarged forced">
+{% endif %}
+
+{% include "login.html" %}
 
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="row">
-                <div class="col-md-10 col-sm-offset-1">
-                    <div class="post-preview">
-
-                        <a class="col-md-6" href="/crearSolicitud">
-                            <div class="col-md-12" align="center">
-                                  <img align=center src="/static/media/solicitud.png" height="200px" width="200px">
-                            </div>
-                            <div  class="col-md-12" align="center">
-                                <h2 class="post-title">
-                                    Crear Solicitud
-                                </h2>
-                            </div>
-                            <p class="col-md-12 text-center post-meta">Crea una Solicitud</p>
-                        </a>
-
-                        <a class="col-md-6" href="/solicitudes">
-                            <div class="col-md-12" align="center" >
-                                  <img src="/static/media/lista.png" height="200px" width="200px">
-                            </div>
-                            <div  class="col-md-12" align="center">
-                                <h2 class="post-title">
-                                    Lista de Solicitudes
-                                </h2>
-                            </div>
-                            <p class="col-md-12 text-center post-meta">Revisa tus solicitudes</p>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
+<!-- Top Bar Start -->
+<div class="topbar">
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <div class="text-center">
+            <!--<a href="index.html" class="logo"><span>Up</span>Bond</a>-->
+            <!--<a href="index.html" class="logo-sm"><span>U</span></a>-->
+            <a href="{% url 'index' %}" class="logo"><img src="../../static/assets/images/logo.png" height="20"
+                                                          alt="logo"></a>
+            <a href="{% url 'index' %}" class="logo-sm"><img src="../../static/assets/images/logo_sm.png" height="30"
+                                               alt="logo"></a>
         </div>
     </div>
 
+    <!-- Button mobile view to collapse sidebar menu -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
 
-{% endblock %}
+            {% if user.is_authenticated %}
+
+                <div class="">
+                    <div class="pull-left">
+                        <button type="button" class="button-menu-mobile open-left waves-effect waves-light">
+                            <i class="ion-navicon"></i>
+                        </button>
+                        <span class="clearfix"></span>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right pull-right">
+
+                        <!-- Boton pantalla completa -->
+                        <li class="hidden-xs">
+                            <a href="#" id="btn-fullscreen"
+                               class="waves-effect waves-light notification-icon-box"><i class="ion-qr-scanner"></i></a>
+                        </li>
+
+                        <!-- Botón de sesión-->
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile waves-effect waves-light"
+                               data-toggle="dropdown" aria-expanded="true">
+                                <img src="../static/assets/images/users/avatar-1.jpg" alt="user-img"
+                                     class="img-circle">
+                                <span class="profile-username">{{ user.username }}<span class="caret"></span>
+                                        </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)"> Perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="../logout"> Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+
+            {% else %}
+
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle waves-effect waves-light notification-icon-box"
+                           data-toggle="modal"
+                           data-target="#myModal"><i class="mdi mdi-account-key"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- Top Bar End -->
+
+
+<!-- ========== Left Sidebar Start ========== -->
+{% if user.is_authenticated %}
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft">
+
+            <div class="user-details">
+                <div class="text-center">
+                    <img src="../static/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
+                </div>
+                <div class="user-info">
+                    <div class="dropdown">
+                        <h4>
+                            {{ user.first_name }} {{ user.last_name }}
+                            <small><i>{{ usuario_parametro.rol_usuario.descripcion }}</i></small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!--- Divider -->
+
+            <!-- Genera el menu de usuario -->
+            <div id="sidebar-menu">
+                <ul>
+                    {% for obj in lista_menu %}
+                        <li class="has_sub">
+                            <a href="#" class="waves-effect">
+                                <span class="mdi mdi-chevron-down"></span>
+                                <span> {{ obj.menu }} </span>
+                            </a>
+
+                            <ul class="list-unstyled">
+                                {% for op in obj.opciones %}
+                                    <li>
+                                        <a href="{{ op.template }}">
+                                            <span class="mdi mdi-chevron-right "></span>{{ op.opcion }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div> <!-- end sidebarinner -->
+    </div>
+{% endif %}
+<!-- Left Sidebar End -->
+
+<!-- Start right Content here -->
+
+<div class="content-page">
+
+    {% block content %}
+        <!-- Aquí va el contenido de la página -->
+        <div class="content">
+
+            <div class="">
+                <div class="page-header-title">
+                    <h4 class="page-title">Solicitudes</h4>
+                </div>
+            </div>
+
+            <div class="page-content-wrapper">
+                <div class="container">
+                    <!-- Aquí va el contenido de la página -->
+                    <div class="row">
+                        <div class="col-md-10 col-sm-offset-1">
+                            <div class="post-preview">
+
+                                <a class="col-md-6" href="/crearSolicitud">
+                                    <div class="col-md-12" align="center">
+                                        <img align=center src="/static/media/solicitud.png" height="200px"
+                                             width="200px">
+                                    </div>
+                                    <div class="col-md-12" align="center">
+                                        <h2 class="post-title">
+                                            Crear Solicitud
+                                        </h2>
+                                    </div>
+                                    <p class="col-md-12 text-center post-meta">Crea una Solicitud</p>
+                                </a>
+
+                                <a class="col-md-6" href="/solicitudes">
+                                    <div class="col-md-12" align="center">
+                                        <img src="/static/media/lista.png" height="200px" width="200px">
+                                    </div>
+                                    <div class="col-md-12" align="center">
+                                        <h2 class="post-title">
+                                            Lista de Solicitudes
+                                        </h2>
+                                    </div>
+                                    <p class="col-md-12 text-center post-meta">Revisa tus solicitudes</p>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+
+    <footer class="footer">
+        © 2017 EmmaLabs - Universidad de los Andes.
+    </footer>
+
+</div>
+<!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- jQuery  -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/bootstrap.min.js"></script>
+<script src="../static/assets/js/modernizr.min.js"></script>
+<script src="../static/assets/js/detect.js"></script>
+<script src="../static/assets/js/fastclick.js"></script>
+<script src="../static/assets/js/jquery.slimscroll.js"></script>
+<script src="../static/assets/js/jquery.blockUI.js"></script>
+<script src="../static/assets/js/waves.js"></script>
+<script src="../static/assets/js/wow.min.js"></script>
+<script src="../static/assets/js/jquery.nicescroll.js"></script>
+<script src="../static/assets/js/jquery.scrollTo.min.js"></script>
+<!--Morris Chart-->
+<script src="../static/assets/plugins/morris/morris.min.js"></script>
+<script src="../static/assets/plugins/raphael/raphael-min.js"></script>
+<script src="../static/assets/pages/dashborad.js"></script>
+<script src="../static/assets/js/app.js"></script>
+
+
+</body>
+</html>
