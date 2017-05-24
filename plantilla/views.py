@@ -138,6 +138,19 @@ def inicializarDatos():
                 protocolo1.insumos.add(insumo2)
                 protocolo1.save()
 
+                protocolo2 = Protocolo()
+                protocolo2.nombre = "protocolo1"
+                protocolo2.descripcion = "protocolo1"
+                protocolo2.version = 2
+                protocolo2.fecha_creacion = "2017-01-01"
+                protocolo2.codigo = "1"
+                protocolo2.clasificacion = clasificacionProtocolo
+                protocolo2.observaciones = "protocolo1"
+                protocolo2.save()
+                protocolo2.insumos.add(insumo1)
+                protocolo2.insumos.add(insumo2)
+                protocolo2.save()
+
                 experimento1 = Experimento()
                 experimento1.nombre = "experimento1"
                 experimento1.descripcion = "experimento1"

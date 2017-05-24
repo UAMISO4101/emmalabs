@@ -1,4 +1,5 @@
 # coding=utf-8
+from django.db.models import Max
 from django.shortcuts import render
 from django.contrib import messages
 from experimento.models import Experimento
@@ -31,7 +32,7 @@ def registrarResultado(request, id):
     experimento = Experimento.objects.get(id=id)
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
-    protocolos = Protocolo.objects.all()
+    protocolos = Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
     context = {
         'experimento': experimento,
         'proyectos' : proyectos,

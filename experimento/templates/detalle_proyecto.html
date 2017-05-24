@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td>Fecha de creación</td>
-                            <td>{{ proyecto.fecha_creacion }}</td>
+                            <td>{{ proyecto.fecha_creacion|date:"Y-m-d" }}</td>
                         </tr>
                         <tr>
                             <td>Estado del proyecto</td>
@@ -62,8 +62,8 @@
                             <tr>
                                 <td>{{ experimento.nombre }}</td>
                                 <td>{{ experimento.estado }}</td>
-                                <td>{{ experimento.resultado }}</td>
-                                <td>{{ experimento.fecha_resultado }}</td>
+                                <td>{% if experimento.resultado != none %}{{ experimento.resultado }}{% endif %}</td>
+                                <td>{{ experimento.fecha_resultado|date:"Y-m-d" }}</td>
                                 <td><button type="button" class="btn btn-default" onclick="show_results({{ experimento.id }});" data-toggle="modal" data-target="#myModal">Realizar</button></td>
                                 {% if experimento.resultado != none %}
                                     <td><a href="/registrar_resultado/{{ experimento.id }}" class="btn btn-default btn-sm">Agregar resultados</a></td>

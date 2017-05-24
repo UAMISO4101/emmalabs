@@ -62,7 +62,7 @@
                                 <td>
                                     <select name="protocolo" class="col-md-12 form-control">
                                         {% for prot in protocolos %}
-                                            <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                            <option value="{{ prot.id }}">{{ prot.nombre }} ({{prot.version}})</option>
                                         {% endfor %}
                                     </select>
                                 </td>
