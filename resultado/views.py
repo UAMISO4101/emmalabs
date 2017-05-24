@@ -2,7 +2,7 @@
 from django.contrib import messages
 from django.db.models import Max
 from django.shortcuts import render
-
+from datetime import datetime
 import usuario.views as UsuarioView
 from experimento.models import Experimento
 from protocolo.models import Protocolo
@@ -21,7 +21,7 @@ def registrarResultado(request, id):
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
         obrevaciones = request.POST['obrevaciones']
-        fecha = request.POST['fecha']
+        fecha = datetime.strptime(request.POST['fecha'], "%m/%d/%Y")
         proyecto = request.POST['proyecto']
         experimento = request.POST['experimento']
         protocolo = request.POST['protocolo']
@@ -40,7 +40,7 @@ def registrarResultado(request, id):
     experimento = Experimento.objects.get(id=id)
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
-    protocolos = Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
+    protocolos = Protocolo.objects.all()#Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
 
     context = {
         'experimento': experimento,

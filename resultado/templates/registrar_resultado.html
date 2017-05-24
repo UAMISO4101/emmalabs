@@ -216,10 +216,9 @@
                                             <td>
 
                                                 <div class="form-group">
-                                                    <label>Auto Close</label>
                                                     <div>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control"
+                                                            <input name="fecha" type="text" class="form-control"
                                                                    placeholder="yyyy-mm-dd"
                                                                    id="datepicker-autoclose">
                                                             <span class="input-group-addon bg-custom b-0"><i
@@ -235,7 +234,7 @@
                                             <td>
                                                 <select name="protocolo" class="col-md-12 form-control">
                                                     {% for prot in protocolos %}
-                                                        <option value="{{ prot.id }}">{{ prot.nombre }}</option>
+                                                        <option value="{{ prot.id }}">{{ prot.nombre }} ({{prot.version}})</option>
                                                     {% endfor %}
                                                 </select>
                                             </td>
