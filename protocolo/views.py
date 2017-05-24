@@ -10,7 +10,7 @@ import usuario.views as UsuarioView
 from usuario.models import Usuario
 from .forms import ProtocoloForm
 from .forms import ProtocoloForm, CrearProtocoloForm
-from .models import Protocolo, Paso
+from .models import Protocolo, Paso, ComentarioProtocolo
 
 
 def buscar_protocolo_vista(request):
