@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from protocolo.models import Protocolo, ClasificacionProtocolo, Paso
+from protocolo.models import Protocolo, ClasificacionProtocolo, Paso, ComentarioProtocolo
 
 class videoAdmin(admin.ModelAdmin):
     list_display = ('nombre',)
@@ -11,3 +11,4 @@ class videoAdmin(admin.ModelAdmin):
 admin.site.register(Protocolo, videoAdmin)
 admin.site.register(ClasificacionProtocolo)
 admin.site.register(Paso)
+admin.site.register(ComentarioProtocolo)

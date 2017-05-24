@@ -39,7 +39,7 @@ def registrarResultado(request, id):
     experimento = Experimento.objects.get(id=id)
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
-    protocolos = Protocolo.objects.all()
+    protocolos = Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
 
     context = {
         'experimento': experimento,

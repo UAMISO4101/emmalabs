@@ -226,10 +226,33 @@
                         <div class="panel panel-default">
                             <div class="panel-body">{{ protocolo.observaciones }}</div>
                         </div>
+
+			<br/><br/>
+
+			<table class="table table-hover">
+			<thead>
+			<th>Comentarios</th>
+			</thead>
+			<tbody>
+			{% for co in comentarios_protocolo  %}
+			<tr>
+			<td>{{ co.texto }}</td>
+			</tr>
+			{% endfor %}
+			<tr>
+			<td>
+			<form method="post" id="formulario" class="form text-center">
+			<input type="hidden" name="id_protocolo" value="{{ protocolo.id }}" />
+			<input type="text" name="comentario_nuevo"/>
+			<input type="submit" value="Enviar" class="btn btn-default btn-sm"/>
+			<form>
+			</td>
+			</tr>
+			</tbody>
+			</table>
+
                         <a href="{% url 'buscarProtocolo' %}" class="btn btn-primary">Volver</a>
                     </div>
-
-
                 </div>
             </div>
         </div>
