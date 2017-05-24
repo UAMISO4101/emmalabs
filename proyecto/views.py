@@ -1,5 +1,4 @@
 # coding=utf-8
-import datetime
 from django.shortcuts import render
 import usuario.views as UsuarioView
 from django.http import HttpResponseRedirect
@@ -20,7 +19,6 @@ def proyectos(request):
     # Cargar el usuario activo
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
-
     # if usuario_actual.is_authenticated:
     # Cargar los proyectos del usuario ha iniciado sesión
     if usuario_actual.rol_usuario == "rol_asistente":
@@ -37,7 +35,13 @@ def proyectos(request):
 
     return render(request, 'proyectos.html', context)
 
+
 def crear_proyecto(request):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     if request.method == 'POST':
         form = ProyectoForm(request.POST)
         # Validar formulario
@@ -57,4 +61,10 @@ def crear_proyecto(request):
     else:
         form = ProyectoForm()
 
-    return render(request, 'crearProyecto.html', {'form':form})
+    context = {
+        'form': form,
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
+    }
+
+    return render(request, 'crearProyecto.html', context)

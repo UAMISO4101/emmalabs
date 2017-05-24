@@ -9,7 +9,12 @@ from proyecto.models import Proyecto
 from usuario.models import Usuario
 from django.urls import reverse
 
+
 def crear_experimento(request, id):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
     if request.method == 'POST':
         form = ExperimentoForm(request.POST)
         # Validar formulario
@@ -33,7 +38,14 @@ def crear_experimento(request, id):
     else:
         form = ExperimentoForm()
 
-    return render(request, 'crearExperimento.html', {'form':form})
+    context = {
+        'form': form,
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
+    }
+
+    return render(request, 'crearExperimento.html', context)
+
 
 def detalleProyecto(request, id):
     # Inicializar variables
