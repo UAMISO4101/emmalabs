@@ -58,6 +58,10 @@ def buscar_protocolo_vista(request):
 
 
 def detalle_protocolo_vista(request, id_protocolo):
+    # Cargar el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     if (request.method == "POST"):
         usuario_actual = request.user
         usuario = Usuario.objects.get(user_id=usuario_actual.id)
@@ -72,9 +76,7 @@ def detalle_protocolo_vista(request, id_protocolo):
     # Traer los objetos relacionados
     lista_pasos = Paso.objects.filter(protocolo=id_protocolo)
     lista_insumos = protocolo.insumos.all()
-    # Cargar el menu del usuario
-    lista_menu = UsuarioView.crearMenu(request.user)
-    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     comentarios_protocolo = ComentarioProtocolo.objects.filter(protocolo=id_protocolo).order_by('id')
 
     # Subir la informacion al contexto
@@ -92,6 +94,10 @@ def detalle_protocolo_vista(request, id_protocolo):
 
 # Vista para crear un Protocolo
 def crear_protocolo(request):
+    # Cargar el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+
     if request.method == 'POST':
         form = CrearProtocoloForm(request.POST)
         # Validar formulario
@@ -109,7 +115,13 @@ def crear_protocolo(request):
     else:
         form = CrearProtocoloForm()
 
-    return render(request, 'crearProtocolo.html', {'form': form})
+    context = {
+        'form': form,
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
+    }
+
+    return render(request, 'crearProtocolo.html', context)
 
 
 def actualizar_protocolo(request, id_protocolo):

@@ -172,6 +172,11 @@
                 <div class="container">
                     <!-- Aquí va el contenido de la página -->
                     <div class="post-preview">
+                        {% if numero_ordenes == 0 %}
+                            <div class="alert alert-warning">
+                                Actualmente no existen órdenes de compra registradas.
+                            </div>
+                        {% endif %}
                         {% for orden in lista_ordenes %}
                             <a class="col-md-12 orden-de-compra"
                                style="position: relative; border: 1px solid #BBB; border-radius: 3px; float:left; width: 200px; height: 250px; margin: 5px; padding: 0; display: inline-block"

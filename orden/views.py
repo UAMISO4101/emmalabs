@@ -12,11 +12,13 @@ def ordenes(request):
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
     lista_ordenes = Orden.objects.all()
+    numero_ordenes = len(lista_ordenes)
 
     context = {
         'lista_ordenes': lista_ordenes,
         'usuario_parametro': usuario_parametro,
         'lista_menu': lista_menu,
+        'numero_ordenes': numero_ordenes,
     }
 
     return render(request, 'ordenes.html', context)

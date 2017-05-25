@@ -228,6 +228,7 @@
                                         <div class="col-sm-6">
                                             <h3>Lista de pasos:</h3>
                                             <div class="list-group">
+                                                {{ protocolo.descripcion }}
                                                 {% for paso in lista_pasos %}
                                                     <a href="#" class="list-group-item">{{ paso.descripcion }}</a>
                                                 {% endfor %}

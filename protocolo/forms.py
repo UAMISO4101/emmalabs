@@ -40,8 +40,8 @@ class CrearProtocoloForm(forms.ModelForm):
         ]
         labels = {
             'nombre': 'Nombre',
-            'codigo': 'Codigo',
-            'clasificacion': 'Clasificacion',
+            'codigo': 'Código',
+            'clasificacion': 'Clasificación',
             'descripcion': 'Lista de pasos',
             'insumos': 'Insumos',
             'observaciones': 'Observaciones',
