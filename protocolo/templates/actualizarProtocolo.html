@@ -1,4 +1,6 @@
 {% load bootstrap3 %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" href="../static/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico">
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="../static/assets/plugins/morris/morris.css">
-    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../static/assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="../static/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../static/assets/plugins/morris/morris.css">
+    <link href="../../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -38,9 +40,9 @@
         <div class="text-center">
             <!--<a href="index.html" class="logo"><span>Up</span>Bond</a>-->
             <!--<a href="index.html" class="logo-sm"><span>U</span></a>-->
-            <a href="{% url 'index' %}" class="logo"><img src="../../static/assets/images/logo.png" height="20"
+            <a href="{% url 'index' %}" class="logo"><img src="../../../static/assets/images/logo.png" height="20"
                                                           alt="logo"></a>
-            <a href="{% url 'index' %}" class="logo-sm"><img src="../../static/assets/images/logo_sm.png" height="30"
+            <a href="{% url 'index' %}" class="logo-sm"><img src="../../../static/assets/images/logo_sm.png" height="30"
                                                              alt="logo"></a>
         </div>
     </div>
@@ -71,7 +73,7 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle profile waves-effect waves-light"
                                data-toggle="dropdown" aria-expanded="true">
-                                <img src="../static/assets/images/users/avatar-1.jpg" alt="user-img"
+                                <img src="../../static/assets/images/users/avatar-1.jpg" alt="user-img"
                                      class="img-circle">
                                 <span class="profile-username">{{ user.username }}<span class="caret"></span>
                                         </span>
@@ -114,7 +116,7 @@
 
             <div class="user-details">
                 <div class="text-center">
-                    <img src="../static/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
+                    <img src="../../static/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
                 </div>
                 <div class="user-info">
                     <div class="dropdown">
@@ -167,40 +169,40 @@
         <!-- Start content -->
         <div class="content">
 
-            <div class="">
-                <div class="page-header-title">
-                    <h4 class="page-title">Crear Proyecto</h4>
-                </div>
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">Crear protocolo</h4>
             </div>
+        </div>
 
-            <div class="page-content-wrapper">
-                <div class="container">
-                    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="container">
+                <div class="row">
 
-                        <div class="panel panel-color panel-dark">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Diligencie el formulario para crear un nuevo proyecto</h3>
-                            </div>
-                            <div class="panel-body">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    {% bootstrap_form form %}
-                                    {% buttons %}
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                            Guardar
-                                        </button>
-                                        <input type="button" value="Volver" class="btn btn-default"
-                                               onClick=" window.location.href={% url 'proyectos' %}">
-                                    {% endbuttons %}
-                                </form>
-                            </div>
+
+                    <div class="panel panel-color panel-dark">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Diligencia el formulario para crear una nueva versión del
+                                protocolo</h3>
                         </div>
 
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                            {% endfor %}
-                        {% endif %}
+                        <div class="panel-body">
+
+                            <form method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form_actualizar_protocolo %}
+
+                                {% buttons %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                        Guardar
+                                    </button>
+                                    <input type="button" value="Volver" class="btn btn-default"
+                                           onClick=" window.location.href='{% url 'buscarProtocolo' %}' ">
+                                {% endbuttons %}
+                            </form>
+
+                        </div>
+
 
                     </div>
                 </div>
@@ -214,29 +216,29 @@
         © 2017 EmmaLabs - Universidad de los Andes.
     </footer>
 
-</div>
-<!-- End Right content here -->
+    </div>
+    <!-- End Right content here -->
 
 </div>
 <!-- END wrapper -->
 
 <!-- jQuery  -->
-<script src="../static/assets/js/jquery.min.js"></script>
-<script src="../static/assets/js/bootstrap.min.js"></script>
-<script src="../static/assets/js/modernizr.min.js"></script>
-<script src="../static/assets/js/detect.js"></script>
-<script src="../static/assets/js/fastclick.js"></script>
-<script src="../static/assets/js/jquery.slimscroll.js"></script>
-<script src="../static/assets/js/jquery.blockUI.js"></script>
-<script src="../static/assets/js/waves.js"></script>
-<script src="../static/assets/js/wow.min.js"></script>
-<script src="../static/assets/js/jquery.nicescroll.js"></script>
-<script src="../static/assets/js/jquery.scrollTo.min.js"></script>
+<script src="../../static/assets/js/jquery.min.js"></script>
+<script src="../../static/assets/js/bootstrap.min.js"></script>
+<script src="../../static/assets/js/modernizr.min.js"></script>
+<script src="../../static/assets/js/detect.js"></script>
+<script src="../../static/assets/js/fastclick.js"></script>
+<script src="../../static/assets/js/jquery.slimscroll.js"></script>
+<script src="../../static/assets/js/jquery.blockUI.js"></script>
+<script src="../../static/assets/js/waves.js"></script>
+<script src="../../static/assets/js/wow.min.js"></script>
+<script src="../../static/assets/js/jquery.nicescroll.js"></script>
+<script src="../../static/assets/js/jquery.scrollTo.min.js"></script>
 <!--Morris Chart-->
-<script src="../static/assets/plugins/morris/morris.min.js"></script>
-<script src="../static/assets/plugins/raphael/raphael-min.js"></script>
-<script src="../static/assets/pages/dashborad.js"></script>
-<script src="../static/assets/js/app.js"></script>
+<script src="../../static/assets/plugins/morris/morris.min.js"></script>
+<script src="../../static/assets/plugins/raphael/raphael-min.js"></script>
+<script src="../../static/assets/pages/dashborad.js"></script>
+<script src="../../static/assets/js/app.js"></script>
 
 
 </body>

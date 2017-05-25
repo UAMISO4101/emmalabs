@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-import datetime
 from django import forms
-from django.forms import DateField
-from functools import partial
 
-from insumo.models import Insumo
 from .models import Protocolo, ClasificacionProtocolo
-from django.contrib.admin.widgets import AdminDateWidget
 
 
 class MyModelChoiceField(forms.ModelChoiceField):
@@ -32,7 +27,6 @@ class ProtocoloForm(forms.ModelForm):
 
 
 class CrearProtocoloForm(forms.ModelForm):
-
     class Meta:
         model = Protocolo
 
@@ -45,8 +39,30 @@ class CrearProtocoloForm(forms.ModelForm):
             'observaciones',
         ]
         labels = {
-            'nombre' : 'Nombre',
+            'nombre': 'Nombre',
             'codigo': 'Codigo',
+            'clasificacion': 'Clasificacion',
+            'descripcion': 'Lista de pasos',
+            'insumos': 'Insumos',
+            'observaciones': 'Observaciones',
+        }
+        widgets = {
+            'descripcion': forms.Textarea,
+            'observaciones': forms.Textarea,
+        }
+
+
+class ActualizarProtocoloForm(forms.ModelForm):
+    class Meta:
+        model = Protocolo
+
+        fields = [
+            'descripcion',
+            'insumos',
+            'clasificacion',
+            'observaciones',
+        ]
+        labels = {
             'clasificacion': 'Clasificacion',
             'descripcion': 'Lista de pasos',
             'insumos': 'Insumos',
