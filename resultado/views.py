@@ -20,9 +20,6 @@ def registrarResultado(request, id):
 
     if (request.method == "POST"):
 
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        print()
-
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
         observaciones = request.POST['observaciones']
