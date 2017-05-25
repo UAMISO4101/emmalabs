@@ -1,8 +1,9 @@
 # coding=utf-8
-from django.contrib import messages
-from django.db.models import Max
-from django.shortcuts import render
 from datetime import datetime
+
+from django.contrib import messages
+from django.shortcuts import render
+
 import usuario.views as UsuarioView
 from experimento.models import Experimento
 from protocolo.models import Protocolo
@@ -20,7 +21,7 @@ def registrarResultado(request, id):
     if (request.method == "POST"):
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
-        obrevaciones = request.POST['observaciones']
+        observaciones = request.POST['observaciones']
         fecha = datetime.strptime(request.POST['fecha'], "%m/%d/%Y")
         proyecto = request.POST['proyecto']
         experimento = request.POST['experimento']
@@ -29,7 +30,7 @@ def registrarResultado(request, id):
         resultado = Resultado()
         resultado.detalle_resultado = resultados
         resultado.satisfactorio = satisfactorio
-        resultado.observaciones = obrevaciones
+        resultado.observaciones = observaciones
         resultado.fecha_resultado = fecha
         resultado.proyecto = Proyecto.objects.get(id=proyecto)
         resultado.experimento = Experimento.objects.get(id=experimento)
@@ -40,7 +41,7 @@ def registrarResultado(request, id):
     experimento = Experimento.objects.get(id=id)
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
-    protocolos = Protocolo.objects.all()#Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
+    protocolos = Protocolo.objects.all()  # Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
 
     context = {
         'experimento': experimento,

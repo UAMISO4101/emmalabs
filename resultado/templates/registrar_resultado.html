@@ -40,7 +40,7 @@
             <a href="{% url 'index' %}" class="logo"><img src="../../static/assets/images/logo.png" height="20"
                                                           alt="logo"></a>
             <a href="{% url 'index' %}" class="logo-sm"><img src="../../static/assets/images/logo_sm.png" height="30"
-                                               alt="logo"></a>
+                                                             alt="logo"></a>
         </div>
     </div>
 
@@ -76,8 +76,6 @@
                                         </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0)"> Perfil</a></li>
-                                <li class="divider"></li>
                                 <li><a href="../logout"> Cerrar Sesión</a></li>
                             </ul>
                         </li>
@@ -234,7 +232,9 @@
                                             <td>
                                                 <select name="protocolo" class="col-md-12 form-control">
                                                     {% for prot in protocolos %}
-                                                        <option value="{{ prot.id }}">{{ prot.nombre }} ({{prot.version}})</option>
+                                                        <option value="{{ prot.id }}">{{ prot.nombre }}
+                                                            ({{ prot.version }})
+                                                        </option>
                                                     {% endfor %}
                                                 </select>
                                             </td>
@@ -294,8 +294,11 @@
                                                 <td>{{ res.detalle_resultado }}</td>
                                                 <td>{% if res.satisfactorio %}Si{% else %}No{% endif %}</td>
                                                 <td>{{ res.observaciones }}</td>
-                                                <td>{% if res.fecha_resultado != none %}{{ res.fecha_resultado|date:"Y-m-d" }}{% endif %}</td>
-                                                <td><a href="/registrar_mezcla/{{ res.id }}" class="btn btn-primary waves-effect waves-light">Agregar mezcla</a></td>
+                                                <td>{% if res.fecha_resultado != none %}
+                                                    {{ res.fecha_resultado|date:"Y-m-d" }}{% endif %}</td>
+                                                <td><a href="/registrar_mezcla/{{ res.id }}"
+                                                       class="btn btn-primary waves-effect waves-light">Agregar
+                                                    mezcla</a></td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
