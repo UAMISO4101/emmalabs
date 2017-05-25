@@ -52,6 +52,8 @@ def detalleProyecto(request, id):
     lista_menu = UsuarioView.crearMenu(request.user)
     # Cargar el usuario activo
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
+    print ('Usuario_parametro')
+    print ('rol_usuario=', usuario_parametro.rol_usuario.rol)
 
     if (request.method == "POST"):
         resultado = request.POST['resultado']

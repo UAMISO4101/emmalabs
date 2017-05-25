@@ -204,7 +204,11 @@
                         </div>
                     </div>
 
-                    <a href="/proyectos/{{ proyecto.id }}/crearExperimento" style="float: right;" class="btn btn-primary">Nuevo experimento</a>
+                    {% if usuario_parametro.rol_usuario.rol = 'rol_cientifico' %}
+                        <a href="/proyectos/{{ proyecto.id }}/crearExperimento" style="float: right;"
+                           class="btn btn-primary">Nuevo experimento</a>
+                    {% endif %}
+                
                     <br/><br/>
 
                     {% include "dialogo_resultado.html" %}
@@ -227,7 +231,8 @@
                                     <tr>
                                         <td>{{ experimento.nombre }}</td>
                                         <td>{{ experimento.estado }}</td>
-                                        <td>{% if experimento.resultado != none %}{{ experimento.resultado }}{% endif %}</td>
+                                        <td>{% if experimento.resultado != none %}
+                                            {{ experimento.resultado }}{% endif %}</td>
                                         <td>{{ experimento.fecha_resultado }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary waves-effect waves-light"
@@ -237,7 +242,8 @@
                                         </td>
                                         {% if experimento.resultado != none %}
                                             <td><a href="/registrar_resultado/{{ experimento.id }}"
-                                                   class="btn btn-primary waves-effect waves-light">Agregar resultados</a></td>
+                                                   class="btn btn-primary waves-effect waves-light">Agregar
+                                                resultados</a></td>
                                         {% endif %}
                                     </tr>
                                 {% endfor %}
