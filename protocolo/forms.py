@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import datetime
 from django import forms
-from functools import partial
+
 from .models import Protocolo, ClasificacionProtocolo
 
 
@@ -11,10 +10,7 @@ class MyModelChoiceField(forms.ModelChoiceField):
 
 
 class ProtocoloForm(forms.ModelForm):
-    # Elemento para inicializar el selector de fechas
-    DateInput = partial(forms.DateInput, {'class': 'datepicker'})
     # Campos de búsqueda
-    fecha_creacion = forms.DateField(widget=DateInput(), required=False, label='Fecha de creacion')
     clasificacion = MyModelChoiceField(queryset=ClasificacionProtocolo.objects.all(),
                                        empty_label='Seleccione una clasificacion...',
                                        to_field_name='nombre_clasificacion',
@@ -27,4 +23,52 @@ class ProtocoloForm(forms.ModelForm):
         fields = ('nombre',)
         labels = {
             'nombre': 'Nombre:',
+        }
+
+
+class CrearProtocoloForm(forms.ModelForm):
+    class Meta:
+        model = Protocolo
+
+        fields = [
+            'nombre',
+            'descripcion',
+            'insumos',
+            'codigo',
+            'clasificacion',
+            'observaciones',
+        ]
+        labels = {
+            'nombre': 'Nombre',
+            'codigo': 'Codigo',
+            'clasificacion': 'Clasificacion',
+            'descripcion': 'Lista de pasos',
+            'insumos': 'Insumos',
+            'observaciones': 'Observaciones',
+        }
+        widgets = {
+            'descripcion': forms.Textarea,
+            'observaciones': forms.Textarea,
+        }
+
+
+class ActualizarProtocoloForm(forms.ModelForm):
+    class Meta:
+        model = Protocolo
+
+        fields = [
+            'descripcion',
+            'insumos',
+            'clasificacion',
+            'observaciones',
+        ]
+        labels = {
+            'clasificacion': 'Clasificacion',
+            'descripcion': 'Lista de pasos',
+            'insumos': 'Insumos',
+            'observaciones': 'Observaciones',
+        }
+        widgets = {
+            'descripcion': forms.Textarea,
+            'observaciones': forms.Textarea,
         }

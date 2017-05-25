@@ -2,5 +2,5 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^registrar_mezcla/(\d+)/$', views.registrarMezcla)
+    url(r'^registrar_mezcla/(\d+)/$', views.registrarMezcla, name='registrar_mezcla')
 ]

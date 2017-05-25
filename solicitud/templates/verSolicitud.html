@@ -1,160 +1,371 @@
-{% extends 'base.html' %}
-
-    {# Load the tag library #}
 {% load bootstrap3 %}
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% block content %}
 
-    <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('/static/img/contact-bg.jpg')">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EmmaLabs - Laboratorio Químico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" href="../../static/assets/images/favicon.ico">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="../../static/assets/plugins/morris/morris.css">
+    <link href="../../static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="../../static/assets/css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<!-- Amplia la pantalla o la reduce automaticamente-->
+{% if user.is_authenticated %}
+    <body class="fixed-left">
+    <!-- Begin page -->
+    <div id="wrapper">
+{% else %}
+    <body class="widescreen fixed-left-void">
+    <!-- Begin page -->
+    <div id="wrapper" class="enlarged forced">
+{% endif %}
+
+{% include "login.html" %}
+
+
+<!-- Top Bar Start -->
+<div class="topbar">
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <div class="text-center">
+            <!--<a href="index.html" class="logo"><span>Up</span>Bond</a>-->
+            <!--<a href="index.html" class="logo-sm"><span>U</span></a>-->
+            <a href="{% url 'index' %}" class="logo"><img src="../../static/assets/images/logo.png" height="20"
+                                                          alt="logo"></a>
+            <a href="{% url 'index' %}" class="logo-sm"><img src="../../static/assets/images/logo_sm.png" height="30"
+                                                             alt="logo"></a>
+        </div>
+    </div>
+
+    <!-- Button mobile view to collapse sidebar menu -->
+    <div class="navbar navbar-default" role="navigation">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>Solicitud</h1>
-                        <hr class="small">
-                        <span class="subheading"></span>
+
+            {% if user.is_authenticated %}
+
+                <div class="">
+                    <div class="pull-left">
+                        <button type="button" class="button-menu-mobile open-left waves-effect waves-light">
+                            <i class="ion-navicon"></i>
+                        </button>
+                        <span class="clearfix"></span>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right pull-right">
+
+                        <!-- Boton pantalla completa -->
+                        <li class="hidden-xs">
+                            <a href="#" id="btn-fullscreen"
+                               class="waves-effect waves-light notification-icon-box"><i class="ion-qr-scanner"></i></a>
+                        </li>
+
+                        <!-- Botón de sesión-->
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile waves-effect waves-light"
+                               data-toggle="dropdown" aria-expanded="true">
+                                <img src="../../static/assets/images/users/avatar-1.jpg" alt="user-img"
+                                     class="img-circle">
+                                <span class="profile-username">{{ user.username }}<span class="caret"></span>
+                                        </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../logout"> Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+
+            {% else %}
+
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle waves-effect waves-light notification-icon-box"
+                           data-toggle="modal"
+                           data-target="#myModal"><i class="mdi mdi-account-key"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- Top Bar End -->
+
+
+<!-- ========== Left Sidebar Start ========== -->
+{% if user.is_authenticated %}
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft">
+
+            <div class="user-details">
+                <div class="text-center">
+                    <img src="../../static/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
+                </div>
+                <div class="user-info">
+                    <div class="dropdown">
+                        <h4>
+                            {{ user.first_name }} {{ user.last_name }}
+                            <small><i>{{ usuario_parametro.rol_usuario.descripcion }}</i></small>
+                        </h4>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+            <!--- Divider -->
 
+            <!-- Genera el menu de usuario -->
+            <div id="sidebar-menu">
+                <ul>
+                    {% for obj in lista_menu %}
+                        <li class="has_sub">
+                            <a href="#" class="waves-effect">
+                                <span class="mdi mdi-chevron-down"></span>
+                                <span> {{ obj.menu }} </span>
+                            </a>
 
-
-    <!-- Main Content Solicitud-->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                            <ul class="list-unstyled">
+                                {% for op in obj.opciones %}
+                                    <li>
+                                        <a href="{{ op.template }}">
+                                            <span class="mdi mdi-chevron-right "></span>{{ op.opcion }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
-                {% endif %}
 
-                <header class="page-header">
-                    <h2 class="text-center">{{ solicitud.titulo }}</h2>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Tipo de solicitud</td>
-                            <td>{{ solicitud.tipo }}</td>
-                        </tr>
-                        <tr>
-                            <td>Fecha de creación</td>
-                            <td>{{ solicitud.fecha_creacion }}</td>
-                        </tr>
-                        <tr>
-                            <td>Estado de la solicitud</td>
-                            <td>{{ solicitud.estado }}</td>
-                        </tr>
-                        <tr>
-                            <td>Solicitud enviada por</td>
-                            <td>{{ solicitud.usuario_creador.nombres }} {{ solicitud.usuario_creador.apellidos }}</td>
-                        </tr>
-                        <tr>
-                            <td>Solicitud enviada a</td>
-                            <td>{{ solicitud.usuario_destino.nombres }} {{ solicitud.usuario_destino.apellidos }}</td>
-                        </tr>
-                        <tr>
-                            <td>Mensaje enviado</td>
-                            <td>{{ solicitud.texto }}</td>
-                        </tr>
-                        <tr>
-                            <td>Mensaje de respuesta</td>
-                            <td>{{ solicitud.respuesta }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </header>
+                </ul>
             </div>
-        </div>
+            <div class="clearfix"></div>
+        </div> <!-- end sidebarinner -->
     </div>
+{% endif %}
+<!-- Left Sidebar End -->
 
+<!-- Start right Content here -->
 
+<div class="content-page">
 
-    {% if form %}
-        <!-- Main Content Orden de Compra-->
-        <div class="container">
-            <div class="row">
-                <div class="row">
-                    <div class="col-md-6 col-sm-offset-3">
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                            {% endfor %}
-                        {% endif %}
+    {% block content %}
+        <!-- Aquí va el contenido de la página -->
+        <div class="content">
 
-                        <h3>Crear orden de compra</h3>
-                        <form method="post" id="FormularioOrden" style="width: 80%">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            {% buttons %}
-                                <input type="button" value="Guardar" class="btn btn-default" name="btn_guardarOrden" data-toggle="modal" data-target="#modalAprobar"/>
-                                <input type="button" value="Volver" class="btn btn-default" onClick=" window.location.href='../' ">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalRechazar">Rechazar</button>
-                            {% endbuttons %}
-                        </form>
+            <div class="">
+                <div class="page-header-title">
+                    <h4 class="page-title">Solicitud</h4>
+                </div>
+            </div>
+
+            <div class="page-content-wrapper">
+                <div class="container">
+                    <!-- Aquí va el contenido de la página -->
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="panel panel-color panel-dark">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ solicitud.titulo }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td>Tipo de solicitud</td>
+                                    <td>{{ solicitud.tipo }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de creación</td>
+                                    <td>{{ solicitud.fecha_creacion }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Estado de la solicitud</td>
+                                    <td>{{ solicitud.estado }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Solicitud enviada por</td>
+                                    <td>{{ solicitud.usuario_creador.nombres }} {{ solicitud.usuario_creador.apellidos }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Solicitud enviada a</td>
+                                    <td>{{ solicitud.usuario_destino.nombres }} {{ solicitud.usuario_destino.apellidos }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mensaje enviado</td>
+                                    <td>{{ solicitud.texto }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mensaje de respuesta</td>
+                                    <td>{{ solicitud.respuesta }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            {% if form %}
+                                <!-- Main Content Orden de Compra-->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-offset-3">
+                                                {% if messages %}
+                                                    {% for message in messages %}
+                                                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                                <h3>Crear orden de compra</h3>
+                                                <form method="post" id="FormularioOrden" style="width: 80%">
+                                                    {% csrf_token %}
+                                                    {% bootstrap_form form %}
+                                                    {% buttons %}
+                                                        <input type="button" value="Guardar" class="btn btn-default"
+                                                               name="btn_guardarOrden" data-toggle="modal"
+                                                               data-target="#modalAprobar"/>
+                                                        <input type="button" value="Volver" class="btn btn-default"
+                                                               onClick=" window.location.href='../' ">
+                                                        <button type="button" class="btn btn-default btn-sm"
+                                                                data-toggle="modal" data-target="#modalRechazar">
+                                                            Rechazar
+                                                        </button>
+                                                    {% endbuttons %}
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% else %}
+                                {% buttons %}
+                                    <div style="text-align:center;">
+                                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                                                onClick=" window.location.href='../' ">
+                                            Volver
+                                        </button>
+                                    </div>
+                                {% endbuttons %}
+                            {% endif %}
+                        </div>
                     </div>
+
+                    <!-- Modal Rechazar Solicitud-->
+                    <div class="modal fade" id="modalRechazar" tabindex="-1" role="dialog"
+                         aria-labelledby="modalResultado">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modalResultado">Rechazar Solicitud</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" id="formularioRechazar">
+                                        <p>El estado de la solicitud cambiará a estado "Rechazado". ¿Desea enviar un
+                                            mensaje al usuario dueño de la solicitud?</p>
+                                        <textarea class="form-control" cols="40" id="id_respuesta" maxlength="50"
+                                                  name="respuesta" placeholder="Mensaje" rows="10"
+                                                  title=""></textarea>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                            form="formularioRechazar"
+                                            name="btn_rechazarSol">Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal crear orden de compra y aprobar solicitud-->
+                    <div class="modal fade" id="modalAprobar" tabindex="-1" role="dialog"
+                         aria-labelledby="modalResultado">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modalResultado">Crear orden de compra</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" id="formularioAprobar">
+                                        <p>La orden de compra se creará y la solicitud asociada pasara a estado
+                                            "Aprobado". ¿Desea enviar un mensaje al usuario dueño de la
+                                            solicitud?</p>
+                                        <textarea class="form-control" cols="40" id="id_respuesta" maxlength="50"
+                                                  form="FormularioOrden" name="respuestaAprobado"
+                                                  placeholder="Mensaje" rows="10" title=""></textarea>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                            form="FormularioOrden"
+                                            name="btn_aprobarSol">Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-    {% else %}
-        {% buttons %}
-            <div style="text-align:center;">
-                <input type="button" value="Volver" class="btn btn-default" onClick=" window.location.href='../' ">
-            </div>
-        {% endbuttons %}
-    {% endif %}
+    {% endblock %}
 
 
-    <!-- Modal Rechazar Solicitud-->
-    <div class="modal fade" id="modalRechazar" tabindex="-1" role="dialog" aria-labelledby="modalResultado">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modalResultado">Rechazar Solicitud</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="formularioRechazar">
-                        <p>El estado de la solicitud cambiará a estado "Rechazado". ¿Desea enviar un mensaje al usuario dueño de la solicitud?</p>
-                        <textarea class="form-control" cols="40" id="id_respuesta" maxlength="50" name="respuesta" placeholder="Mensaje" rows="10" title=""></textarea>
-                        <br>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-default btn-sm" form="formularioRechazar" name="btn_rechazarSol">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal crear orden de compra y aprobar solicitud-->
-    <div class="modal fade" id="modalAprobar" tabindex="-1" role="dialog" aria-labelledby="modalResultado">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modalResultado">Crear orden de compra</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="formularioAprobar">
-                        <p>La orden de compra se creará y la solicitud asociada pasara a estado "Aprobado". ¿Desea enviar un mensaje al usuario dueño de la solicitud?</p>
-                        <textarea class="form-control" cols="40" id="id_respuesta" maxlength="50" form="FormularioOrden" name="respuestaAprobado" placeholder="Mensaje" rows="10" title=""></textarea>
-                        <br>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-default btn-sm" form="FormularioOrden" name="btn_aprobarSol">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="footer">
+        © 2017 EmmaLabs - Universidad de los Andes.
+    </footer>
 
-{% endblock %}
+</div>
+<!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- jQuery  -->
+<script src="../../static/assets/js/jquery.min.js"></script>
+<script src="../../static/assets/js/bootstrap.min.js"></script>
+<script src="../../static/assets/js/modernizr.min.js"></script>
+<script src="../../static/assets/js/detect.js"></script>
+<script src="../../static/assets/js/fastclick.js"></script>
+<script src="../../static/assets/js/jquery.slimscroll.js"></script>
+<script src="../../static/assets/js/jquery.blockUI.js"></script>
+<script src="../../static/assets/js/waves.js"></script>
+<script src="../../static/assets/js/wow.min.js"></script>
+<script src="../../static/assets/js/jquery.nicescroll.js"></script>
+<script src="../../static/assets/js/jquery.scrollTo.min.js"></script>
+<!--Morris Chart-->
+<script src="../../static/assets/plugins/morris/morris.min.js"></script>
+<script src="../../static/assets/plugins/raphael/raphael-min.js"></script>
+<script src="../../static/assets/pages/dashborad.js"></script>
+<script src="../../static/assets/js/app.js"></script>
+
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render
 from solicitud.models import TipoSolicitud
-from usuario.models import LoginForm, Rol
+from usuario.models import LoginForm, Rol, MenuPorRol
 from usuario.models import Usuario
 from insumo.models import Insumo
 from protocolo.models import ClasificacionProtocolo
@@ -57,6 +57,11 @@ def inicializarDatos():
                 rol2.descripcion = "rol_asistente"
                 rol2.save()
 
+                rol3 = Rol()
+                rol3.rol = "rol_jefe"
+                rol3.descripcion = "rol_jefe"
+                rol3.save()
+
                 user1 = User()
                 user1.username = "cientifico"
                 user1.password = "pbkdf2_sha256$30000$pYq6s9qQGJjg$HKurLl0z+LYBfyW/q4rEClXwapFjx5W5pKwXwGAobdE="
@@ -86,6 +91,21 @@ def inicializarDatos():
                 usuario2.intereses = "asistente"
                 usuario2.rol_usuario = rol2
                 usuario2.save()
+
+                user3 = User()
+                user3.username = "jefe"
+                user3.password = "pbkdf2_sha256$30000$pYq6s9qQGJjg$HKurLl0z+LYBfyW/q4rEClXwapFjx5W5pKwXwGAobdE="
+                user3.save()
+
+                usuario3 = Usuario()
+                usuario3.user = user3
+                usuario3.nombres = "jefe"
+                usuario3.apellidos = "jefe"
+                usuario3.pais = "jefe"
+                usuario3.ciudad = "jefe"
+                usuario3.intereses = "jefe"
+                usuario3.rol_usuario = rol3
+                usuario3.save()
 
                 insumo1 = Insumo()
                 insumo1.nombre = "insumo1"
@@ -117,6 +137,19 @@ def inicializarDatos():
                 protocolo1.insumos.add(insumo1)
                 protocolo1.insumos.add(insumo2)
                 protocolo1.save()
+
+                protocolo2 = Protocolo()
+                protocolo2.nombre = "protocolo1"
+                protocolo2.descripcion = "protocolo1"
+                protocolo2.version = 2
+                protocolo2.fecha_creacion = "2017-01-01"
+                protocolo2.codigo = "1"
+                protocolo2.clasificacion = clasificacionProtocolo
+                protocolo2.observaciones = "protocolo1"
+                protocolo2.save()
+                protocolo2.insumos.add(insumo1)
+                protocolo2.insumos.add(insumo2)
+                protocolo2.save()
 
                 experimento1 = Experimento()
                 experimento1.nombre = "experimento1"
@@ -151,5 +184,97 @@ def inicializarDatos():
                 tipoSolicitud = TipoSolicitud()
                 tipoSolicitud.nombre = "Compra"
                 tipoSolicitud.save()
+
+                menuCientifico1 = MenuPorRol()
+                menuCientifico1.menu = "Proyectos"
+                menuCientifico1.opcion = "Ver Proyectos"
+                menuCientifico1.template = "../proyectos"
+                menuCientifico1.rol = rol1
+                menuCientifico1.save()
+
+                menuCientifico2 = MenuPorRol()
+                menuCientifico2.menu = "Experimentos"
+                menuCientifico2.opcion = "Ver Experimentos"
+                menuCientifico2.template = "../proyectos"
+                menuCientifico2.rol = rol1
+                menuCientifico2.save()
+
+                menuCientifico3 = MenuPorRol()
+                menuCientifico3.menu = "Protocolos"
+                menuCientifico3.opcion = "Buscar Protocolo"
+                menuCientifico3.template = "../buscarProtocolo"
+                menuCientifico3.rol = rol1
+                menuCientifico3.save()
+
+                menuCientifico4 = MenuPorRol()
+                menuCientifico4.menu = "Ordenes"
+                menuCientifico4.opcion = "Listar Ordenes"
+                menuCientifico4.template = "../ordenes"
+                menuCientifico4.rol = rol1
+                menuCientifico4.save()
+
+                menuCientifico5 = MenuPorRol()
+                menuCientifico5.menu = "Solicitudes"
+                menuCientifico5.opcion = "Gestionar Solicitudes"
+                menuCientifico5.template = "../menuSolicitud"
+                menuCientifico5.rol = rol1
+                menuCientifico5.save()
+
+                menuAsistente1 = MenuPorRol()
+                menuAsistente1.menu = "Proyectos"
+                menuAsistente1.opcion = "Ver Proyectos"
+                menuAsistente1.template = "../proyectos"
+                menuAsistente1.rol = rol2
+                menuAsistente1.save()
+
+                menuAsistente2 = MenuPorRol()
+                menuAsistente2.menu = "Experimentos"
+                menuAsistente2.opcion = "Ver Experimentos"
+                menuAsistente2.template = "../proyectos"
+                menuAsistente2.rol = rol2
+                menuAsistente2.save()
+
+                menuAsistente3 = MenuPorRol()
+                menuAsistente3.menu = "Protocolos"
+                menuAsistente3.opcion = "Buscar Protocolo"
+                menuAsistente3.template = "../buscarProtocolo"
+                menuAsistente3.rol = rol2
+                menuAsistente3.save()
+
+                menuAsistente4 = MenuPorRol()
+                menuAsistente4.menu = "Ordenes"
+                menuAsistente4.opcion = "Listar Ordenes"
+                menuAsistente4.template = "../ordenes"
+                menuAsistente4.rol = rol2
+                menuAsistente4.save()
+
+                menuAsistente5 = MenuPorRol()
+                menuAsistente5.menu = "Solicitudes"
+                menuAsistente5.opcion = "Gestionar Solicitudes"
+                menuAsistente5.template = "../menuSolicitud"
+                menuAsistente5.rol = rol2
+                menuAsistente5.save()
+
+                menuJefe1 = MenuPorRol()
+                menuJefe1.menu = "Proyectos"
+                menuJefe1.opcion = "Ver Proyectos"
+                menuJefe1.template = "../proyectos"
+                menuJefe1.rol = rol3
+                menuJefe1.save()
+
+                menuJefe2 = MenuPorRol()
+                menuJefe2.menu = "Experimentos"
+                menuJefe2.opcion = "Ver Experimentos"
+                menuJefe2.template = "../proyectos"
+                menuJefe2.rol = rol3
+                menuJefe2.save()
+
+                menuJefe3 = MenuPorRol()
+                menuJefe3.menu = "Solicitudes"
+                menuJefe3.opcion = "Gestionar Solicitudes"
+                menuJefe3.template = "../menuSolicitud"
+                menuJefe3.rol = rol3
+                menuJefe3.save()
+
     except:
         pass

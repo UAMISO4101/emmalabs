@@ -1,0 +1,32 @@
+<!-- sample modal content -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
+            </div>
+            <form role="form" action="login" method="post" enctype="multipart/form-data" id="login-form"
+                  novalidate="novalidate">
+                <div class="modal-body">
+                    <!--suppress HtmlUnknownTarget -->
+
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {% for field in form_login %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

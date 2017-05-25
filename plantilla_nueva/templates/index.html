@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">Bienvenido al Laboratorio Químico</h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper">
+
+            <div class="container">
+
+                {% if user.is_authenticated %}
+
+                    <div class="row">
+                        <center><h3>Dashboard</h3></center>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-muted m-t-10 font-light">Asignado a</h4>
+                                </div>
+                                <div class="panel-body p-t-10">
+                                    <h2 class="m-t-0 m-b-15 text-purple font-light">
+                                        {{ usuario_proyectos }}
+                                    </h2>
+                                    <p class=" m-b-0 m-t-20 text-muted">Proyectos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-muted m-t-10 font-light">En curso</h4>
+                                </div>
+                                <div class="panel-body p-t-10">
+                                    <h2 class="m-t-0 m-b-15 text-purple font-light">
+                                        {{ usuario_experimentos }}
+                                    </h2>
+                                    <p class="text-muted m-b-0 m-t-20">Experimentos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-muted m-t-10 font-light">Pendientes de revisión</h4>
+                                </div>
+                                <div class="panel-body p-t-10">
+                                    <h2 class="m-t-0 m-b-15 text-purple font-light">
+                                        {{ usuario_solicitudes }}
+                                    </h2>
+                                    <p class="m-b-0 m-t-20 text-muted">Órdenes de compra</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-muted m-t-10 font-light">Disponibles</h4>
+                                </div>
+                                <div class="panel-body p-t-10">
+                                    <h2 class="m-t-0 m-b-15 text-purple font-light">
+                                        {{ usuario_maquinas }}
+                                    </h2>
+                                    <p class="text-muted m-b-0 m-t-20">Máquinas solicitadas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--fin row -->
+                {% else %}
+                    <center>
+                        <div class="row" style="width: 80%">
+                            <h3> Dependiendo de su rol, los usuarios podrán </h3>
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div>
+                                        <ul class="nav nav-tabs navtab-bg nav-justified">
+                                            <li class="">
+                                                <a href="#home1" data-toggle="tab" aria-expanded="false">
+                                                    <span>Científico</span>
+
+                                                </a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#profile1" data-toggle="tab" aria-expanded="true">
+                                                    <span>Asistente</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="#messages1" data-toggle="tab" aria-expanded="false">
+                                                    <span>Jefe</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="home1">
+                                                <p align="justify">El científico del laboratorio es el encargado de
+                                                    liderar los
+                                                    proyectos, los experimentos que se ejecutan en cada proyecto y vela
+                                                    por mantener actualizados los protocolos según sea necesario.</p>
+                                                <p align="justify">Adicionalmente el científico puede ver todas las
+                                                    solicitudes de
+                                                    compra y decidir si se aprueba o se rechazan órdenes de compra
+                                                    realizadas por el jefe de laboratorio.</p>
+                                            </div>
+                                            <div class="tab-pane active" id="profile1">
+                                                <p align="justify">El asistente de laboratorio es el encargado de
+                                                    ejecutar los
+                                                    experimentos, esto lo hace siguiendo los protocolos
+                                                    establecidos.</p>
+                                                <p align="justify">Adicionalmente puede realizar comentarios sobre los
+                                                    protocolos
+                                                    sugiriendo cambios, puede registrar si un experimiento fue exitoso y
+                                                    puede realizar solicitudes de cmpra de insumos o de materialss.</p>
+                                            </div>
+                                            <div class="tab-pane" id="messages1">
+                                                <p align="justify">El jefe de laboratorio es el encargado de vigilar
+                                                    el inventario de
+                                                    insumos y gestionar la disponibilidad de las máquinas disponibles
+                                                    del laboratorio.</p>
+                                                <p align="justify">El jefe de laboratorio puede aprobar las
+                                                    solicitudes de compra
+                                                    realizadas por los asistentes y esta aprobación creará una orden de
+                                                    compra, esta orden de compra queda pendiente de aprobación por parte
+                                                    del científico.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- fin panel body -->
+                            </div><!-- fin panel primary -->
+                        </div><!--fin row -->
+                        <a href="#" class="btn btn-success waves-effect waves-light"
+                           data-toggle="modal"
+                           data-target="#myModal"><i class="mdi mdi-account-key"></i> Iniciar Sesión
+                        </a>
+                    </center>
+                {% endif %}
+
+            </div> <!-- fin container -->
+        </div> <!-- Fin wrapper -->
+    </div><!-- End content -->
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} float-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <strong>Error: </strong> {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <strong>Info: </strong> {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                    <strong>Info: </strong> {% endif %}
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock %}

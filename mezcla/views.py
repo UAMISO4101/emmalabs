@@ -1,17 +1,22 @@
 # coding=utf-8
-from django.shortcuts import render
 from django.contrib import messages
-from experimento.models import Experimento
-from proyecto.models import Proyecto
-from protocolo.models import Protocolo
-from resultado.models import Resultado
+from django.shortcuts import render
+
+import usuario.views as UsuarioView
 from insumo.models import Insumo
 from maquina.models import Maquina
 from mezcla.models import Mezcla
+from resultado.models import Resultado
+from usuario.models import Usuario
+
 
 def registrarMezcla(request, id):
-    if(request.method == "POST"):
+    # Crear el menu del usuario
+    lista_menu = UsuarioView.crearMenu(request.user)
+    # Cargar el usuario activo
+    usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
+    if (request.method == "POST"):
         resultado = request.POST['resultado']
         insumo = request.POST['insumo']
         descripcion = request.POST['descripcion']
@@ -30,9 +35,13 @@ def registrarMezcla(request, id):
     resultado = Resultado.objects.get(id=id)
     insumos = Insumo.objects.all()
     maquinas = Maquina.objects.all()
+
     context = {
         'resultado': resultado,
         'insumos': insumos,
-        'maquinas': maquinas
+        'maquinas': maquinas,
+        'lista_menu': lista_menu,
+        'usuario_parametro': usuario_parametro,
     }
+
     return render(request, 'registrar_mezcla.html', context)
