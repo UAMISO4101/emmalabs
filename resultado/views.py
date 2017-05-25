@@ -20,7 +20,7 @@ def registrarResultado(request, id):
     if (request.method == "POST"):
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
-        obrevaciones = request.POST['obrevaciones']
+        obrevaciones = request.POST['observaciones']
         fecha = datetime.strptime(request.POST['fecha'], "%m/%d/%Y")
         proyecto = request.POST['proyecto']
         experimento = request.POST['experimento']
