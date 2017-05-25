@@ -19,6 +19,10 @@ def registrarResultado(request, id):
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
 
     if (request.method == "POST"):
+
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        print()
+
         resultados = request.POST['resultados']
         satisfactorio = request.POST['satisfactorio']
         observaciones = request.POST['observaciones']
