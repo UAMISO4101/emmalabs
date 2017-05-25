@@ -1,13 +1,14 @@
 # coding=utf-8
-from django.shortcuts import render
-import usuario.views as UsuarioView
-from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+
+import usuario.views as UsuarioView
 from experimento.forms import ExperimentoForm
 from experimento.models import Experimento
 from proyecto.models import Proyecto
 from usuario.models import Usuario
-from django.urls import reverse
 
 
 def crear_experimento(request, id):
@@ -52,8 +53,6 @@ def detalleProyecto(request, id):
     lista_menu = UsuarioView.crearMenu(request.user)
     # Cargar el usuario activo
     usuario_parametro = Usuario.objects.get(user_id=request.user.id)
-    print ('Usuario_parametro')
-    print ('rol_usuario=', usuario_parametro.rol_usuario.rol)
 
     if (request.method == "POST"):
         resultado = request.POST['resultado']
