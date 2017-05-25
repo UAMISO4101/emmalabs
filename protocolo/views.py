@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from sqlalchemy.sql.functions import concat
 
 import usuario.views as UsuarioView
 from usuario.models import Usuario
