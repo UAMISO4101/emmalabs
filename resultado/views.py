@@ -41,7 +41,8 @@ def registrarResultado(request, id):
     experimento = Experimento.objects.get(id=id)
     resultados = Resultado.objects.filter(experimento=experimento)
     proyectos = Proyecto.objects.all()
-    protocolos = Protocolo.objects.all()  # Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
+    sqlProtocolos = "SELECT * FROM public.protocolo_protocolo pro2 INNER JOIN(SELECT MAX(pro.version) as version, pro.nombre as nombre FROM public.protocolo_protocolo pro GROUP BY pro.nombre)  sq ON (pro2.nombre = sq.nombre AND pro2.version = sq.version)"
+    protocolos = Protocolo.objects.raw(sqlProtocolos)  # Protocolo.objects.all().values('nombre', 'version').annotate(Max('version'))
 
     context = {
         'experimento': experimento,
