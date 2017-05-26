@@ -63,11 +63,6 @@ instance/
 # Sphinx documentation
 docs/_build/
 
-orden/migrations/*
-proyecto/migrations/*
-protocolo/migrations/*
-usuario/migrations/*
-
 # PyBuilder
 target/
 
